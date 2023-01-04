@@ -1,10 +1,14 @@
+import java.util.Scanner;
 
 public class Test {
-	
+
 	public void test() {
-		Book b = new Book("Knjiga o dzungli", 200, "Kipling");
-		Book b1 = new Book("Stefan i ja", 300, "Dzoganovic Stefan");
-		System.out.println(b.toString());
-		System.out.println(b1.toString());
+		Library li = new Library();
+		Login lo  = new Login();
+		System.out.println("Molimo vas unesite vase korisnicko ime i  vasu  lozinku ");
+		Scanner sc = new Scanner(System.in);
+		String username = sc.next();
+		String password = sc.next();
+		System.out.println(lo.validate(username, password));
 	}
 }

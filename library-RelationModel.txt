@@ -1,0 +1,5 @@
+Book(ISBN-,name,price,category,author_id--,year_of_publication);
+Author(id-,name);
+employee(id-,name,password);
+reader(id-,name,email,phone_number);
+reservation(book_id--,reader_id--,date_of_reservation,return_date);
