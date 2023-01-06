@@ -10,7 +10,8 @@ public class Test {
 //		String password = sc.next();
 //		System.out.println(lo.validate(username, password));
 //		sc.close();
-		LoginScreen ls = new LoginScreen();
-		ls.initialize();
+		WelcomeScreen w = new WelcomeScreen();
+		w.initialize();
+	
 	}
 }

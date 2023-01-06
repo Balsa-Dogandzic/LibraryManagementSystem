@@ -26,4 +26,26 @@ public class Login {
 		}
 		return status;
 	}
+
+	public boolean addUser(String name, String email, String phoneNumber) {
+		try (
+
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+
+				PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO reader (name,email,phone_number) VALUES (?,?,?)")) {
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, email);
+			preparedStatement.setString(3, phoneNumber);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			return true;
+		} catch (Exception e) {
+			// process sql exception
+			System.out.println(e);
+		}
+		return false;
+
+	}
 }
