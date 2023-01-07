@@ -98,7 +98,9 @@ public class WelcomeScreen extends JFrame {
 		JButton btnNewButton_1 = new JButton("Sign in ");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				SignIn si = new SignIn();
+				si.initialize();
+				notInitialeze();
 			}
 		});
 		panel_2.add(btnNewButton_1);

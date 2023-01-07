@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Login {
@@ -28,24 +29,21 @@ public class Login {
 	}
 
 	public boolean addUser(String name, String email, String phoneNumber) {
-		try (
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "INSERT INTO reader (name,email,phone_number) VALUES ('" + name + "','" + email + "','"
+					+ phoneNumber + "')";
 
-				Connection con = JDBCConnection.getConnection();
-				Statement stmt = con.createStatement();
-
-				PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO reader (name,email,phone_number) VALUES (?,?,?)")) {
-			preparedStatement.setString(1, name);
-			preparedStatement.setString(2, email);
-			preparedStatement.setString(3, phoneNumber);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
+			stmt.execute(query);
 			return true;
-		} catch (Exception e) {
-			// process sql exception
-			System.out.println(e);
-		}
-		return false;
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
 	}
+
 }
