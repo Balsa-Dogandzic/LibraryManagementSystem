@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Login {
 
@@ -29,18 +31,44 @@ public class Login {
 	}
 
 	public boolean addUser(String name, String email, String phoneNumber) {
-		try {
-			Connection con = JDBCConnection.getConnection();
-			Statement stmt = con.createStatement();
-			String query = "INSERT INTO reader (name,email,phone_number) VALUES ('" + name + "','" + email + "','"
-					+ phoneNumber + "')";
+		Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		Pattern p1 = Pattern.compile("^(\\d{3}[- .]?){2}\\d{3}$");
 
-			stmt.execute(query);
-			return true;
+		if (p.matcher(email).matches() && p1.matcher(phoneNumber).matches()) {
+			try {
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+				String query = "INSERT INTO reader (name,email,phone_number) VALUES ('" + name + "','" + email + "','"
+						+ phoneNumber + "')";
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				stmt.execute(query);
+				return true;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public boolean addWorker(String username, String password) {
+		getMethods gm = new getMethods();
+
+		if (!gm.getWorkers(username)) {
+			try {
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+				String query = "INSERT INTO employee (username,password) VALUES ('" + username + "','" + password
+						+ "')";
+
+				stmt.execute(query);
+				return true;
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return false;

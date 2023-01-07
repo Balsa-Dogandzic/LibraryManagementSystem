@@ -69,11 +69,13 @@ public class WelcomeScreen extends JFrame {
 		panel.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setPreferredSize(new Dimension(10, 41));
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 
 		JPanel panel_3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
+		flowLayout_1.setVgap(0);
 		flowLayout_1.setHgap(30);
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panel_1.add(panel_3);
@@ -83,7 +85,7 @@ public class WelcomeScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				LoginScreen ls = new LoginScreen();
 				ls.initialize();
-				notInitialeze();
+				notInitialize();
 			}
 		});
 		panel_3.add(btnNewButton);
@@ -91,6 +93,7 @@ public class WelcomeScreen extends JFrame {
 
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
+		flowLayout.setVgap(0);
 		flowLayout.setHgap(30);
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panel_1.add(panel_2);
@@ -100,7 +103,7 @@ public class WelcomeScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SignIn si = new SignIn();
 				si.initialize();
-				notInitialeze();
+				notInitialize();
 			}
 		});
 		panel_2.add(btnNewButton_1);
@@ -112,20 +115,49 @@ public class WelcomeScreen extends JFrame {
 		panel_4.setLayout(new GridLayout(2, 0, 0, 0));
 
 		JPanel panel_5 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_5.getLayout();
-		flowLayout_2.setHgap(30);
-		flowLayout_2.setVgap(0);
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
 		panel_4.add(panel_5);
+		panel_5.setLayout(new GridLayout(2, 2, 0, 0));
+
+		JPanel panel_8 = new JPanel();
+		FlowLayout flowLayout_4 = (FlowLayout) panel_8.getLayout();
+		flowLayout_4.setAlignment(FlowLayout.LEFT);
+		panel_5.add(panel_8);
 
 		JLabel lblNewLabel_2 = new JLabel("Maybe you are looking for a job");
+		panel_8.add(lblNewLabel_2);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_5.add(lblNewLabel_2);
 
 		JButton btnNewButton_2 = new JButton("Start here");
+		panel_8.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SignInEmployee se = new SignInEmployee();
+				se.initialize();
+				notInitialize();
+			}
+		});
 		btnNewButton_2.setPreferredSize(new Dimension(80, 25));
-		panel_5.add(btnNewButton_2);
+
+		JPanel panel_9 = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) panel_9.getLayout();
+		flowLayout_2.setAlignment(FlowLayout.LEFT);
+		panel_5.add(panel_9);
+
+		JLabel lblNewLabel_3 = new JLabel("Developer mode (Only for workers)");
+		lblNewLabel_3.setPreferredSize(new Dimension(230, 16));
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_9.add(lblNewLabel_3);
+
+		JButton btnNewButton_3 = new JButton("Go");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginScreen ls = new LoginScreen();
+				ls.initialize();
+				notInitialize();
+			}
+		});
+		panel_9.add(btnNewButton_3);
 
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout_3 = (FlowLayout) panel_6.getLayout();
@@ -145,7 +177,7 @@ public class WelcomeScreen extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void notInitialeze() {
+	public void notInitialize() {
 		this.setVisible(false);
 	}
 }
