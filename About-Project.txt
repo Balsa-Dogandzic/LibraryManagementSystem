@@ -1,0 +1,10 @@
+
+-Da se uradi reggex za email,telefon - ako  vec postoji ime u bazi da se da odgovarajuci  odgovor
+
+-Da se uradi sign in screen za radnika pokriju  greske 
+
+-Doda dugme za biblioteku,da radnik odma moze uci u arhivu knjiga 
+
+-Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok 
+
+-  
