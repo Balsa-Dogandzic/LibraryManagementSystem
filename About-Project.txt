@@ -4,3 +4,15 @@
 -Employee page da se uradi 
 
 -Da se uradi  table- nece da se vide naslovi  kolona 
+
+-da se sortira po  klasama samih objekata metode  //
+
+-login citaoc da se stavi
+
+-dodaj password za citaoca
+
+-rework home page 
+
+-login screen radio button (2) employee and reader 
+
+-

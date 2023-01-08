@@ -77,7 +77,15 @@ public class UserPage extends JFrame {
 		DefaultTableModel model = new DefaultTableModel();
 		model.addRow(new Object[] {});
 		JTable table = new JTable(
-				new DefaultTableModel(new Object[][] {}, new String[] { "ISBN", "Reservation Date", "Return Date" }));
+				new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"ISBN", "Reservation Date", "Return Date"
+			}
+		));
 		table.setPreferredSize(new Dimension(247, 231));
 		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table.setMinimumSize(new Dimension(247, 231));
