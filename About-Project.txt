@@ -2,3 +2,5 @@
 -Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok 
 
 -Employee page da se uradi 
+
+-Da se uradi  table- nece da se vide naslovi  kolona 
