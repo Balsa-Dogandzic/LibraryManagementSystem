@@ -83,8 +83,7 @@ public class WelcomeScreen extends JFrame {
 		JButton btnNewButton = new JButton("Log-in");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginScreen ls = new LoginScreen();
-				ls.initialize();
+				LoginScreen.main(null);
 				notInitialize();
 			}
 		});
@@ -152,8 +151,7 @@ public class WelcomeScreen extends JFrame {
 		JButton btnNewButton_3 = new JButton("Go");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginScreen ls = new LoginScreen();
-				ls.initialize();
+				LoginScreen.main(null);
 				notInitialize();
 			}
 		});

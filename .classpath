@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="dependancies/mysql-connector-java-8.0.28.jar"/>
-	<classpathentry kind="lib" path="jgoodies-common-1.8.0.jar" sourcepath="jgoodies-common-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="dependencies/mysql-connector-java-8.0.28.jar"/>
+	<classpathentry kind="lib" path="dependencies/jgoodies-common-1.8.0.jar" sourcepath="dependencies/jgoodies-common-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="dependencies/jgoodies-forms-1.8.0.jar" sourcepath="dependencies/jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
