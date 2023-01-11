@@ -13,5 +13,4 @@
 
 -rework home page 
 
--login screen radio button (2) employee and reader(odradjen)
 -Da se ubaci nova kolona password za reader-a u bazu pa da se potpuno uradi funkcionalnost login-a
