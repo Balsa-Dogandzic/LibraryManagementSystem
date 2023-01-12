@@ -14,3 +14,5 @@
 -rework home page 
 
 -Da se ubaci nova kolona password za reader-a u bazu pa da se potpuno uradi funkcionalnost login-a
+
+-Go back  da se stavi  na sign  in 

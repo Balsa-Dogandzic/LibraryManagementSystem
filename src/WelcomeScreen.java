@@ -9,6 +9,8 @@ import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -22,8 +24,10 @@ import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridBagLayout;
 
 public class WelcomeScreen extends JFrame {
 
@@ -50,7 +54,7 @@ public class WelcomeScreen extends JFrame {
 	 */
 	public WelcomeScreen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 535, 354);
+		setBounds(100, 100, 635, 565);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -111,64 +115,74 @@ public class WelcomeScreen extends JFrame {
 
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4, BorderLayout.CENTER);
-		panel_4.setLayout(new GridLayout(2, 0, 0, 0));
+		panel_4.setLayout(new GridLayout(0, 3, 0, 0));
 
 		JPanel panel_5 = new JPanel();
 		panel_4.add(panel_5);
-		panel_5.setLayout(new GridLayout(2, 2, 0, 0));
+		panel_5.setLayout(null);
 
-		JPanel panel_8 = new JPanel();
-		FlowLayout flowLayout_4 = (FlowLayout) panel_8.getLayout();
-		flowLayout_4.setAlignment(FlowLayout.LEFT);
-		panel_5.add(panel_8);
+		JLabel lblNewLabel_1 = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("picture1.jpg")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(img));
+		lblNewLabel_1.setBounds(21, 72, 138, 194);
+		panel_5.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_2 = new JLabel("Maybe you are looking for a job");
-		panel_8.add(lblNewLabel_2);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel lblNewLabel_2 = new JLabel("48 laws of power");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(21, 29, 151, 33);
+		panel_5.add(lblNewLabel_2);
 
-		JButton btnNewButton_2 = new JButton("Start here");
-		panel_8.add(btnNewButton_2);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SignInEmployee se = new SignInEmployee();
-				se.initialize();
-				notInitialize();
-			}
-		});
-		btnNewButton_2.setPreferredSize(new Dimension(80, 25));
+		JLabel lblNewLabel_3 = new JLabel("only for 29.99$");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_3.setBounds(21, 276, 133, 33);
+		panel_5.add(lblNewLabel_3);
 
-		JPanel panel_9 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_9.getLayout();
-		flowLayout_2.setAlignment(FlowLayout.LEFT);
-		panel_5.add(panel_9);
+		JPanel panel_5_1 = new JPanel();
+		panel_5_1.setLayout(null);
+		panel_4.add(panel_5_1);
 
-		JLabel lblNewLabel_3 = new JLabel("Developer mode (Only for workers)");
-		lblNewLabel_3.setPreferredSize(new Dimension(230, 16));
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_9.add(lblNewLabel_3);
+		JLabel lblNewLabel_1_1 = new JLabel("");
+		Image img1 = new ImageIcon(this.getClass().getResource("picture2.jpg")).getImage();
+		lblNewLabel_1_1.setIcon(new ImageIcon(img1));
+		lblNewLabel_1_1.setBounds(21, 72, 138, 194);
+		panel_5_1.add(lblNewLabel_1_1);
 
-		JButton btnNewButton_3 = new JButton("Go");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LoginScreen.main(null);
-				notInitialize();
-			}
-		});
-		panel_9.add(btnNewButton_3);
+		JLabel lblNewLabel_2_1 = new JLabel("Dark Tower");
+		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2_1.setBounds(0, 29, 172, 33);
+		panel_5_1.add(lblNewLabel_2_1);
 
-		JPanel panel_6 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_6.getLayout();
-		flowLayout_3.setHgap(30);
-		flowLayout_3.setAlignment(FlowLayout.LEFT);
-		panel_4.add(panel_6);
+		JLabel lblNewLabel_3_1 = new JLabel("only for 60.44$");
+		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_3_1.setBounds(21, 276, 133, 33);
+		panel_5_1.add(lblNewLabel_3_1);
 
-		JLabel lblNewLabel_1 = new JLabel("Please join us");
-		panel_6.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setPreferredSize(new Dimension(130, 30));
-		lblNewLabel_1.setBackground(new Color(240, 240, 240));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
+		JPanel panel_5_2 = new JPanel();
+		panel_5_2.setLayout(null);
+		panel_4.add(panel_5_2);
+
+		JLabel lblNewLabel_1_2 = new JLabel("");
+		Image img2 = new ImageIcon(this.getClass().getResource("picture3.jpg")).getImage();
+		lblNewLabel_1_2.setIcon(new ImageIcon(img2));
+		lblNewLabel_1_2.setBounds(31, 72, 138, 194);
+		panel_5_2.add(lblNewLabel_1_2);
+
+		JLabel lblNewLabel_2_2 = new JLabel("Inferno");
+		lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2_2.setBounds(21, 29, 151, 33);
+		panel_5_2.add(lblNewLabel_2_2);
+
+		JLabel lblNewLabel_3_2 = new JLabel("only for 87.99$");
+		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_3_2.setBounds(21, 276, 133, 33);
+		panel_5_2.add(lblNewLabel_3_2);
+
 	}
 
 	public void initialize() {
