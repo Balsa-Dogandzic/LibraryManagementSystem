@@ -3,16 +3,14 @@
 
 -Employee page da se uradi 
 
--Da se uradi  table- nece da se vide naslovi  kolona 
+-Da se uradi  table- nece da se vide naslovi  kolona(greska u kodu) 
 
 -da se sortira po  klasama samih objekata metode  //
 
 -login citaoc da se stavi
 
--dodaj password za citaoca
-
--rework home page 
-
 -Da se ubaci nova kolona password za reader-a u bazu pa da se potpuno uradi funkcionalnost login-a
 
--Go back  da se stavi  na sign  in 
+-Go back  da se stavi  na sign  in
+
+-Da se izbrise getWorker i da se optimizuje metoda addWorker()
