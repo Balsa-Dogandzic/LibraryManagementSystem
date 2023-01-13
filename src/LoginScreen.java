@@ -86,7 +86,7 @@ public class LoginScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				WelcomeScreen.main(null);
-				frame.dispose();
+			    frame.dispose();
 			}
 		});
 		panel.add(btnGoBack);

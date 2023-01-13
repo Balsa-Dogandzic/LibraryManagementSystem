@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class SignIn extends JFrame {
 
@@ -22,6 +23,7 @@ public class SignIn extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -52,7 +54,7 @@ public class SignIn extends JFrame {
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(7, 0, 0, 0));
+		panel.setLayout(new GridLayout(9, 0, 0, 0));
 
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
@@ -90,6 +92,29 @@ public class SignIn extends JFrame {
 		panel_5.add(textField_1);
 		textField_1.setColumns(10);
 
+		JPanel panel_9 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_9.getLayout();
+		flowLayout.setVgap(12);
+		flowLayout.setHgap(20);
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		panel.add(panel_9);
+
+		JLabel lblNewLabel_3 = new JLabel("Insert your password:");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		panel_9.add(lblNewLabel_3);
+
+		JPanel panel_8 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_8.getLayout();
+		flowLayout_1.setVgap(12);
+		flowLayout_1.setHgap(20);
+		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		panel.add(panel_8);
+
+		passwordField = new JPasswordField();
+		passwordField.setPreferredSize(new Dimension(103, 19));
+		passwordField.setSize(new Dimension(56, 45));
+		panel_8.add(passwordField);
+
 		JPanel panel_6 = new JPanel();
 		panel.add(panel_6);
 		panel_6.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 12));
@@ -109,33 +134,44 @@ public class SignIn extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
-		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 
 		JButton btnNewButton = new JButton("Sign-in");
+		btnNewButton.setBounds(20, 10, 75, 26);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login l = new Login();
 				String name = textField.getText();
 				String email = textField_1.getText();
 				String phone_number = textField_2.getText();
-				if (l.addUser(name, email, phone_number)) {
-					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message", JOptionPane.INFORMATION_MESSAGE);
+				String password = String.valueOf(passwordField.getPassword());
+				if (l.addUser(name, email, password, phone_number)) {
+					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
+		panel_1.setLayout(null);
 		btnNewButton.setPreferredSize(new Dimension(75, 26));
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel_1.add(btnNewButton);
+
+		JButton btnGoBack = new JButton("Back");
+		btnGoBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				WelcomeScreen.main(null);
+				dispose();
+			}
+		});
+		btnGoBack.setPreferredSize(new Dimension(75, 26));
+		btnGoBack.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnGoBack.setBounds(393, 10, 75, 26);
+		panel_1.add(btnGoBack);
 	}
 
 	public void initialize() {
 		this.setVisible(true);
 	}
-
-	public void notInitialeze() {
-		this.setVisible(false);
-	}
-
 }

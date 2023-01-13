@@ -5,12 +5,10 @@
 
 -Da se uradi  table- nece da se vide naslovi  kolona(greska u kodu) 
 
--da se sortira po  klasama samih objekata metode  //
+-login citaoc da se stavi- Balsa
 
--login citaoc da se stavi
+- da se potpuno uradi funkcionalnost login-a
 
--Da se ubaci nova kolona password za reader-a u bazu pa da se potpuno uradi funkcionalnost login-a
+-Nova slika da se nadje za 48 laws of power
 
--Go back  da se stavi  na sign  in
-
--Da se izbrise getWorker i da se optimizuje metoda addWorker()
+-reggex za password i za workere i za readere

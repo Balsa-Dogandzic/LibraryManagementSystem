@@ -88,7 +88,7 @@ public class WelcomeScreen extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginScreen.main(null);
-				notInitialize();
+				dispose();
 			}
 		});
 		panel_3.add(btnNewButton);
@@ -106,7 +106,7 @@ public class WelcomeScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SignIn si = new SignIn();
 				si.initialize();
-				notInitialize();
+               dispose();
 			}
 		});
 		panel_2.add(btnNewButton_1);
@@ -189,7 +189,4 @@ public class WelcomeScreen extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void notInitialize() {
-		this.setVisible(false);
-	}
 }

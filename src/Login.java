@@ -30,7 +30,7 @@ public class Login {
 		return status;
 	}
 
-	public boolean addUser(String name, String email, String phoneNumber) {
+	public boolean addUser(String name, String email, String password, String phoneNumber) {
 		Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 		Pattern p1 = Pattern.compile("^(\\d{3}[- .]?){2}\\d{3}$");
 
@@ -38,40 +38,35 @@ public class Login {
 			try {
 				Connection con = JDBCConnection.getConnection();
 				Statement stmt = con.createStatement();
-				String query = "INSERT INTO reader (name,email,phone_number) VALUES ('" + name + "','" + email + "','"
-						+ phoneNumber + "')";
+				String query = "INSERT INTO reader (name,email,password,phone_number) VALUES ('" + name + "','" + email
+						+ "','" + password + "','" + phoneNumber + "')";
 
 				stmt.execute(query);
 				return true;
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return false;
 			}
 		}
 		return false;
 	}
 
 	public boolean addWorker(String username, String password) {
-		getMethods gm = new getMethods();
 
-		if (!gm.getWorkers(username)) {
-			try {
-				Connection con = JDBCConnection.getConnection();
-				Statement stmt = con.createStatement();
-				String query = "INSERT INTO employee (username,password) VALUES ('" + username + "','" + password
-						+ "')";
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "INSERT INTO employee (username,password) VALUES ('" + username + "','" + password + "')";
 
-				stmt.execute(query);
-				return true;
+			stmt.execute(query);
+			return true;
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return false;
 		}
 
-		return false;
 	}
 
 }
