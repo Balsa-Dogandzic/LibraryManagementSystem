@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Login {
 
-	public boolean validate(String username, String password) {
+	public static boolean validateEmployee(String username, String password) {
 		boolean status = false;
 		try (
 
@@ -24,7 +24,27 @@ public class Login {
 			status = rs.next();
 
 		} catch (Exception e) {
-			// process sql exception
+			System.out.println(e);
+		}
+		return status;
+	}
+	
+	public static boolean validateReader(String email, String password) {
+		boolean status = false;
+		try (
+
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+
+				PreparedStatement preparedStatement = con
+						.prepareStatement("select * from reader where email = ? and password = ? ")) {
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+
+			ResultSet rs = preparedStatement.executeQuery();
+			status = rs.next();
+
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return status;

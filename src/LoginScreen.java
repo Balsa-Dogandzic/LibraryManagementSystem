@@ -1,5 +1,5 @@
 import java.awt.EventQueue;
-
+import java.awt.event.ItemListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
@@ -48,10 +49,11 @@ public class LoginScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JFrame("Login");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JPanel panel = new JPanel();
@@ -64,9 +66,21 @@ public class LoginScreen {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 		
+		JLabel lblNewLabel_1;
+		lblNewLabel_1 = new JLabel("Username");
+		lblNewLabel_1.setBounds(10, 20, 54, 15);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
 		ButtonGroup bg = new ButtonGroup();
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Employee");
+		rdbtnNewRadioButton.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getSource() == rdbtnNewRadioButton) {
+					lblNewLabel_1.setText("Username");
+				}
+			}
+		});
 		rdbtnNewRadioButton.setBounds(0, 54, 215, 48);
 		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		rdbtnNewRadioButton.setSelected(true);
@@ -74,6 +88,14 @@ public class LoginScreen {
 		panel.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Reader");
+		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getSource() == rdbtnNewRadioButton_1) {
+					lblNewLabel_1.setText("Email");
+				}
+			}
+		});
 		rdbtnNewRadioButton_1.setBounds(0, 107, 215, 48);
 		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		bg.add(rdbtnNewRadioButton_1);
@@ -95,9 +117,6 @@ public class LoginScreen {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Username");
-		lblNewLabel_1.setBounds(10, 20, 54, 15);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel_1.add(lblNewLabel_1);
 		
 		textField = new JTextField();
@@ -119,17 +138,25 @@ public class LoginScreen {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String username = textField.getText();
-				String password = String.valueOf(textField_2.getPassword());
-				Login l = new Login();
-				if(l.validate(username, password)) {
-					JOptionPane.showMessageDialog(null, "Successful login","Message",JOptionPane.INFORMATION_MESSAGE);
+				String text1 = textField.getText();
+				String text2 = String.valueOf(textField_2.getPassword());
+				if(rdbtnNewRadioButton.isSelected()) {
+					if(Login.validateEmployee(text1, text2)) {
+						JOptionPane.showMessageDialog(null, "Employee authorized","Message",JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Invalid credentials","Message",JOptionPane.ERROR_MESSAGE);
+					}
 				}else {
-					JOptionPane.showMessageDialog(null, "Invalid credentials","Message",JOptionPane.ERROR_MESSAGE);
+					if(Login.validateReader(text1, text2)) {
+						JOptionPane.showMessageDialog(null, "Reader authorized","Message",JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Invalid credentials","Message",JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});
 		btnNewButton.setBounds(10, 203, 195, 34);
 		panel_1.add(btnNewButton);
 	}
+	
 }

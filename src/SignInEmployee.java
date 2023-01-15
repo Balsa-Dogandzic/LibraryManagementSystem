@@ -43,8 +43,11 @@ public class SignInEmployee extends JFrame {
 	 * Create the frame.
 	 */
 	public SignInEmployee() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super("Add employee");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 515, 374);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

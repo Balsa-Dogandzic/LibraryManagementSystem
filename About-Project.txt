@@ -1,14 +1,17 @@
-
 -Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok 
 
 -Employee page da se uradi 
 
 -Da se uradi  table- nece da se vide naslovi  kolona(greska u kodu) 
 
--login citaoc da se stavi- Balsa
-
-- da se potpuno uradi funkcionalnost login-a
-
--Nova slika da se nadje za 48 laws of power
-
 -reggex za password i za workere i za readere
+
+- Da se mozda klase odvoje u razlicite pakete zbog organizacije koda ?
+
+- Screen za slobodne knjige
+
+- Screen za rezervacije
+
+- Screen za reservisanje
+
+itd...

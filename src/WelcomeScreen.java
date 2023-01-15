@@ -53,8 +53,11 @@ public class WelcomeScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public WelcomeScreen() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super("Welcome");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 635, 565);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,9 +70,9 @@ public class WelcomeScreen extends JFrame {
 		panel.setLayout(fl_panel);
 
 		JLabel lblNewLabel = new JLabel("Welcome to our Bookstore");
-		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setPreferredSize(new Dimension(180, 40));
+		lblNewLabel.setPreferredSize(new Dimension(200, 40));
 		panel.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
