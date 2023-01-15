@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2023 at 09:25 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Jan 15, 2023 at 03:53 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `author` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `author`
@@ -57,7 +57,7 @@ CREATE TABLE `book` (
   `category` varchar(255) NOT NULL,
   `author_id` int(11) NOT NULL,
   `year_of_publication` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `book`
@@ -79,7 +79,7 @@ CREATE TABLE `employee` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee`
@@ -99,16 +99,16 @@ CREATE TABLE `reader` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reader`
 --
 
-INSERT INTO `reader` (`id`, `name`, `email`, `phone_number`) VALUES
-(1, 'Aleksa', 'aleksadogandzic@gmail.com', '069-682-600'),
-(2, 'Dejan', 'dejan@gmail.com', '067-300-300');
+INSERT INTO `reader` (`id`, `name`, `email`, `password`, `phone_number`) VALUES
+(1, 'Aleksa', 'aleksa@gmail.com', 'aleksa123', '069-682-600');
 
 -- --------------------------------------------------------
 
@@ -122,14 +122,7 @@ CREATE TABLE `reservation` (
   `book_id` varchar(255) NOT NULL,
   `date_of_reservation` date NOT NULL,
   `return_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`id`, `reader_id`, `book_id`, `date_of_reservation`, `return_date`) VALUES
-(1, 1, '2381893128', '2020-01-16', '2020-02-16');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -159,7 +152,8 @@ ALTER TABLE `employee`
 -- Indexes for table `reader`
 --
 ALTER TABLE `reader`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `reservation`
