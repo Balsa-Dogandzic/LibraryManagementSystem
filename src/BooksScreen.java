@@ -4,7 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 
 
 public class BooksScreen {
@@ -41,14 +44,13 @@ public class BooksScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 541, 371);
+		frame.setBounds(100, 100, 483, 371);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 527, 334);
 		frame.getContentPane().add(panel_1);
 		
 		table = new JTable();
@@ -76,8 +78,10 @@ public class BooksScreen {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
-		
-		panel_1.add(table);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		JScrollPane sp = new JScrollPane(table);
+
+		panel_1.add(sp);
 	}
 
 }
