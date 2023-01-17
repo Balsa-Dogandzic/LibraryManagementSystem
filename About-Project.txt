@@ -1,17 +1,18 @@
--Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok 
+-Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok
+  - auto resize da se makne i  da se makne auto insert from keyboard in table 
+
+(sa desne strane stavljena tabela sa knjigama, sa lijeve strane log out,dugme da se vide sve slobodne knjige )
 
 -Employee page da se uradi 
-
--Da se uradi  table- nece da se vide naslovi  kolona(greska u kodu) 
-
--reggex za password i za workere i za readere
+(dugme za dodavanje novih radnika,tabela sa rezervacijama, dugme za dodavanje nove knjige,)
 
 - Da se mozda klase odvoje u razlicite pakete zbog organizacije koda ?
 
 - Screen za slobodne knjige
 
-- Screen za rezervacije
+- Screen za rezervacije-Employee page 
 
-- Screen za reservisanje
+- Screen za reservisanje-Userpage
 
-itd...
+- add book do kraja da se zavrsi(validacija nije odradjena- if  is null  return false,isbn - if string.length() < 13 return false)
+

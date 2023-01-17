@@ -84,7 +84,7 @@ public class UserPage extends JFrame {
 		scrollPane.setPreferredSize(new Dimension(270, 300));
 		DefaultTableModel model = new DefaultTableModel();
 		model.addRow(new Object[] {});
-		JTable table = new JTable(new DefaultTableModel(new Object[][] { { null, null, null }, { null, null, null }, },
+		JTable table = new JTable(new DefaultTableModel(new Object[][] { { "stefan", null, null }, { null, null, null }, },
 				new String[] { "ISBN", "Reservation Date", "Return Date" }));
 		table.setPreferredSize(new Dimension(247, 270));
 		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
