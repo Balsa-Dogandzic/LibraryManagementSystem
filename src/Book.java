@@ -61,6 +61,7 @@ public class Book {
 	}
 	
 	public static ArrayList<Book> getAllBooks() {
+		//Makes a list of all the books
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
@@ -86,13 +87,14 @@ public class Book {
 	}
 	
 	public static ArrayList<Book> getFreeBooks() {
+		//Makes a list of books that are not reserved
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
 					+ "JOIN author ON author.id = book.author_id\r\n"
-					+ "WHERE book.isbn != (SELECT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn);");
+					+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn);");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);
