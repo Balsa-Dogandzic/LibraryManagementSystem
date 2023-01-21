@@ -1,7 +1,4 @@
--Screen za svakog readera posebno kolko je knjiga uzeo kolko moze jos da uzme do kad mu je rok
-  - auto resize da se makne i  da se makne auto insert from keyboard in table 
 
-(sa desne strane stavljena tabela sa knjigama, sa lijeve strane log out,dugme da se vide sve slobodne knjige )
 
 -Employee page da se uradi 
 (dugme za dodavanje novih radnika,tabela sa rezervacijama, dugme za dodavanje nove knjige,)
@@ -13,3 +10,6 @@
 - Screen za rezervacije-Employee page 
 
 - Screen za reservisanje-Userpage
+
+- add book do kraja da se zavrsi(validacija nije odradjena- if  is null  return false,isbn - if string.length() < 13 return false)
+
