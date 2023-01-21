@@ -3,6 +3,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Author {
 
@@ -56,6 +57,24 @@ public class Author {
 		}
 		
 		return authors;
+	}
+	
+	public static boolean addAuthor(String name) {
+		Pattern nameRegex = Pattern.compile("^[\\p{Lu}\\p{M}][\\p{L}\\p{M},.'-]+(?: [\\p{L}\\p{M},.'-]+)*$");
+		if (nameRegex.matcher(name).matches()) {
+			try {
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+				String query = "INSERT INTO author(name) VALUES('" + name + "')";
+
+				stmt.execute(query);
+				return true;
+
+			} catch (SQLException e) {
+				return false;
+			}
+		}
+		return false;
 	}
 
 }

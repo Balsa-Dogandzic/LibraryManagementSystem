@@ -123,6 +123,17 @@ public class AddBookScreen {
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(10, 196, 160, 20);
+		textField_3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				//Allows user to enter one dot and digits only
+				String character = Character.toString(e.getKeyChar());
+				if (character.equals(".") && !(textField_3.getText().contains(".")))
+					return;
+				if (!(Character.isDigit(e.getKeyChar())))
+					e.consume();
+			}
+		});
 		panel_1.add(textField_3);
 		
 		JLabel lblNewLabel_5 = new JLabel("Choose the author:");
@@ -153,7 +164,9 @@ public class AddBookScreen {
 		textField_4.setColumns(10);
 		textField_4.setBounds(10, 317, 160, 20);
 		textField_4.addKeyListener(new KeyAdapter() {
+			@Override
 			public void keyTyped(KeyEvent e) {
+				//Allows user to enter only four digits
 				if (!(Character.isDigit(e.getKeyChar())) || textField_4.getText().length() >= 4)
 					e.consume();
 			}
@@ -179,12 +192,12 @@ public class AddBookScreen {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Takes a author id
 				String isbn = textField.getText();
 				String name = textField_1.getText();
 				String category = textField_2.getText();
 				double price = Double.parseDouble(textField_3.getText());
 				Author a = (Author) comboBox.getSelectedItem();
+				//Takes a author id
 				int author_id = a.getId();
 				int year = Integer.parseInt(textField_4.getText());
 				
@@ -200,6 +213,13 @@ public class AddBookScreen {
 		panel_2.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Add an author");
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddAuthorScreen.main(null);
+				frame.dispose();
+			}
+		});
 		panel_2.add(btnNewButton);
 	}
 }
