@@ -7,11 +7,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
+import java.awt.event.ActionListener;
 
 public class UserPage extends JFrame {
 
@@ -25,6 +32,7 @@ public class UserPage extends JFrame {
 	private JTable table_1;
 	private JScrollPane scrollPane;
 	private JLabel lblNewLabel_1;
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -73,6 +81,29 @@ public class UserPage extends JFrame {
 
 		panel_2 = new JPanel();
 		panel_1.add(panel_2);
+		panel_2.setLayout(null);
+
+		JButton btnNewButton = new JButton("Available Books");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BooksScreen bs = new BooksScreen();
+				bs.main(null);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(87, 34, 85, 21);
+		panel_2.add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Log out");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				WelcomeScreen ws = new WelcomeScreen();
+				ws.initialize();
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(87, 98, 85, 21);
+		panel_2.add(btnNewButton_1);
 
 		panel_3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
@@ -82,10 +113,33 @@ public class UserPage extends JFrame {
 
 		scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(270, 300));
-		DefaultTableModel model = new DefaultTableModel();
-		model.addRow(new Object[] {});
-		JTable table = new JTable(new DefaultTableModel(new Object[][] { { "stefan", null, null }, { null, null, null }, },
-				new String[] { "ISBN", "Reservation Date", "Return Date" }));
+		JTable table = new JTable();
+
+		ArrayList<Reservation> reservations = Reservation.getReservation(LoginScreen.getEmail());
+		Object[][] rowData = new Object[reservations.size()][3];
+		for (int i = 0; i < rowData.length; i++) {
+			rowData[i][0] = reservations.get(i).getBook_id();
+			rowData[i][1] = reservations.get(i).getDate_of_reservation();
+			rowData[i][2] = reservations.get(i).getReturn_date();
+		}
+		table.setModel(new DefaultTableModel(rowData, new String[] { "isbn", "Date of Reservation", "Return Date" }) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// Disables editing on the cells
+				return false;
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
 		table.setPreferredSize(new Dimension(247, 270));
 		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table.setMinimumSize(new Dimension(247, 231));
@@ -98,4 +152,13 @@ public class UserPage extends JFrame {
 		this.setVisible(true);
 	}
 
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }
