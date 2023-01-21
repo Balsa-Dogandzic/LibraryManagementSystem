@@ -1,9 +1,9 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -150,6 +152,12 @@ public class AddBookScreen {
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(10, 317, 160, 20);
+		textField_4.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				if (!(Character.isDigit(e.getKeyChar())) || textField_4.getText().length() >= 4)
+					e.consume();
+			}
+		});
 		panel_1.add(textField_4);
 		
 		JPanel panel_2 = new JPanel();
@@ -172,9 +180,22 @@ public class AddBookScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Takes a author id
+				String isbn = textField.getText();
+				String name = textField_1.getText();
+				String category = textField_2.getText();
+				double price = Double.parseDouble(textField_3.getText());
 				Author a = (Author) comboBox.getSelectedItem();
-				System.out.println(a.getId());
-			}
+				int author_id = a.getId();
+				int year = Integer.parseInt(textField_4.getText());
+				
+				if(Book.addBook(isbn, name, category, price, author_id, year)) {
+					JOptionPane.showMessageDialog(null, "Book successfully added", "Message",
+							JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Something went wrong", "Message",
+						JOptionPane.ERROR_MESSAGE);
+ 			}
 		});
 		panel_2.add(btnNewButton_1);
 		

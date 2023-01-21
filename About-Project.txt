@@ -13,6 +13,3 @@
 - Screen za rezervacije-Employee page 
 
 - Screen za reservisanje-Userpage
-
-- add book do kraja da se zavrsi(validacija nije odradjena- if  is null  return false,isbn - if string.length() < 13 return false)
-

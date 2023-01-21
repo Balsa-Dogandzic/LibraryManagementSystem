@@ -1,7 +1,9 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class Book {
 
@@ -9,6 +11,7 @@ public class Book {
 	private double price;
 	private String author;
 	private int year;
+
 	public Book(String isbn, String name, String category, double price, String author, int year) {
 		super();
 		this.isbn = isbn;
@@ -18,56 +21,70 @@ public class Book {
 		this.author = author;
 		this.year = year;
 	}
+
 	public String getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
 	public int getYear() {
 		return year;
 	}
+
 	public void setYear(int year) {
 		this.year = year;
 	}
+
 	@Override
 	public String toString() {
 		return "Book [isbn=" + isbn + ", name=" + name + ", category=" + category + ", price=" + price + ", author="
 				+ author + ", year=" + year + "]";
 	}
-	
+
 	public static ArrayList<Book> getAllBooks() {
-		//Makes a list of all the books
+		// Makes a list of all the books
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
-					+ "JOIN author ON author.id = book.author_id");
+
+			ResultSet rs = stmt.executeQuery(
+					"SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
+							+ "JOIN author ON author.id = book.author_id");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);
@@ -79,22 +96,23 @@ public class Book {
 				books.add(new Book(isbn, name, category, price, author, year));
 			}
 			return books;
-			
+
 		} catch (Exception e) {
 			System.out.println("Greska sa bazom.");
 			return null;
 		}
 	}
-	
+
 	public static ArrayList<Book> getFreeBooks() {
-		//Makes a list of books that are not reserved
+		// Makes a list of books that are not reserved
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
-					+ "JOIN author ON author.id = book.author_id\r\n"
-					+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn);");
+
+			ResultSet rs = stmt.executeQuery(
+					"SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
+							+ "JOIN author ON author.id = book.author_id\r\n"
+							+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn);");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);
@@ -106,10 +124,29 @@ public class Book {
 				books.add(new Book(isbn, name, category, price, author, year));
 			}
 			return books;
-			
+
 		} catch (Exception e) {
 			System.out.println("Greska sa bazom.");
 			return null;
 		}
+	}
+
+	public static boolean addBook(String isbn, String name, String category, double price, int author, int year) {
+		Pattern regexISBN = Pattern.compile("^\\d{10,13}$");
+		if(regexISBN.matcher(isbn).matches() && name.length() != 0 && category.length() != 0) {
+			try {
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+				String query = "INSERT INTO book (isbn,name,category,price,author_id,year_of_publication) VALUES ('" + isbn + "','" + name
+						+ "','" + category + "'," + price + "," + author + "," + year + ")";
+
+				stmt.execute(query);
+				return true;
+
+			} catch (SQLException e) {
+				return false;
+			}
+		}
+		return false;
 	}
 }
