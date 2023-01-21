@@ -1,5 +1,3 @@
-
-
 -Employee page da se uradi 
 (dugme za dodavanje novih radnika,tabela sa rezervacijama, dugme za dodavanje nove knjige,)
 
@@ -11,5 +9,4 @@
 
 - Screen za reservisanje-Userpage
 
-- add book do kraja da se zavrsi(validacija nije odradjena- if  is null  return false,isbn - if string.length() < 13 return false)
-
+- Poseban screen za knjige za usera i zaposlenog
