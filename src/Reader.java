@@ -51,7 +51,7 @@ public class Reader {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM reader;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM reader ORDER BY name;");
 			ArrayList<Reader> readers = new ArrayList<Reader>();
 			while (rs.next()) {
 				int id = rs.getInt(1);

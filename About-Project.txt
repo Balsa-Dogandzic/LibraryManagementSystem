@@ -10,6 +10,6 @@
 
 -Da se napravi poseban bookscreen za readera samo  tabela
 
-- Da se napravi automatski refresh tabele na AddReservationScreen, i regex za date
-
 - Jos uslova na Book.java?
+
+- Da se ubaci kod za pokretanje employee screen-a tamo gdje treba (LoginScreen, AddReservationScreen)

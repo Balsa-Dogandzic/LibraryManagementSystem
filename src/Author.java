@@ -44,7 +44,7 @@ public class Author {
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id, name FROM author");
+			ResultSet rs = stmt.executeQuery("SELECT id, name FROM author ORDER BY name;");
 			Author a;
 
 			while (rs.next()) {

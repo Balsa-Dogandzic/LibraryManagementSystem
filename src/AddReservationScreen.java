@@ -7,8 +7,12 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -74,56 +78,20 @@ public class AddReservationScreen {
 		lblNewLabel_1.setBounds(10, 62, 115, 21);
 		panel.add(lblNewLabel_1);
 		
+		JLabel lblNewLabel_3_1 = new JLabel("yyyy/mm/dd");
+		lblNewLabel_3_1.setForeground(new Color(128, 128, 128));
+		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_3_1.setBounds(221, 344, 115, 21);
+		panel.add(lblNewLabel_3_1);
+		
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(135, 62, 196, 21);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		table = new JTable();
-		table.getTableHeader().setReorderingAllowed(false);
-		ArrayList<Book> books = Book.getFreeBooks();
-		Object[][] rowData = new Object[books.size()][6];
-		for (int i = 0; i < rowData.length; i++) {
-			rowData[i][0] = books.get(i).getIsbn();
-			rowData[i][1] = books.get(i).getName();
-			rowData[i][2] = books.get(i).getCategory();
-			rowData[i][3] = books.get(i).getPrice();
-			rowData[i][4] = books.get(i).getAuthor();
-			rowData[i][5] = books.get(i).getYear();
-		}
-		table.setModel(
-				new DefaultTableModel(rowData, new String[] { "isbn", "Name", "Category", "Price", "Author", "Year" }) {
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-
-					@Override
-					public boolean isCellEditable(int row, int column) {
-						// Disables editing on the cells
-						return false;
-					}
-				});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(100);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(120);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(3).setResizable(false);
-		table.getColumnModel().getColumn(4).setResizable(false);
-		table.getColumnModel().getColumn(5).setResizable(false);
-		
-		//Displays the isbn of the selected row in the text field
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				textField.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
-			}
-		});
-		
-		//Allows only one row to be selected
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table = createTable();
+		insertTableData();
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 108, 620, 111);
@@ -146,22 +114,12 @@ public class AddReservationScreen {
 		lblNewLabel_3.setBounds(10, 313, 115, 21);
 		panel.add(lblNewLabel_3);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 344, 201, 21);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("yyyy/mm/dd");
-		lblNewLabel_3_1.setForeground(new Color(128, 128, 128));
-		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_3_1.setBounds(221, 344, 115, 21);
-		panel.add(lblNewLabel_3_1);
-		
 		JButton btnNewButton = new JButton("Go back");
 		btnNewButton.setBounds(10, 394, 155, 29);
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Should open a employee window
 				frame.dispose();
 			}
 		});
@@ -172,6 +130,7 @@ public class AddReservationScreen {
 		btnReserve.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Adds new reservation
 				String isbn = textField.getText();
 				Reader r = (Reader)comboBox.getSelectedItem();
 				int readerId = r.getId();
@@ -181,8 +140,12 @@ public class AddReservationScreen {
 				if(Reservation.addReservation(readerId, isbn, reserveDate, returnDate)) {
 					JOptionPane.showMessageDialog(null, "Book reserved successfully", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
+					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+					if (table.getSelectedRow() != -1) {
+						tableModel.removeRow(table.getSelectedRow());
+						textField.setText("");
+					}
 					//Add code to return the user back to employee page
-					//Table doesn't automatically refresh
 					return;
 				}
 				JOptionPane.showMessageDialog(null, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
@@ -190,9 +153,92 @@ public class AddReservationScreen {
 		});
 		panel.add(btnReserve);
 		
+		textField_1 = new JTextField();
+		textField_1.setBounds(10, 344, 201, 21);
+		textField_1.setColumns(10);
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				//Doesn't allow wrong date format
+				Pattern p = Pattern.compile("^\\d{4}-\\d{1,2}-\\d{1,2}$");
+				if (!(p.matcher(textField_1.getText() + e.getKeyChar()).matches())) {
+					lblNewLabel_3_1.setForeground(new Color(255,0,0));
+					btnReserve.setEnabled(false);
+				}else {
+					lblNewLabel_3_1.setForeground(new Color(128, 128, 128));
+					btnReserve.setEnabled(true);
+				}
+			}
+		});
+		panel.add(textField_1);
+		
 		JLabel lblNewLabel_4 = new JLabel("Date: " + String.valueOf(new Date(System.currentTimeMillis())));
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_4.setBounds(536, 10, 94, 21);
 		panel.add(lblNewLabel_4);
+	}
+	
+	//Method that creates a table
+	private JTable createTable() {
+		String[] colName = { "isbn", "name", "category", "price", "author", "year"};
+	    if (table == null) {
+	        table = new JTable() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				//Disables cell editing
+				public boolean isCellEditable(int nRow, int nCol) {
+	                return false;
+	            }
+	        };
+	    }
+		
+	    DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
+	    contactTableModel.setColumnIdentifiers(colName);
+	    
+	    //Disables resizing the columns
+	    table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(120);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(5).setResizable(false);
+		
+		//Allows selection of only one row
+	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    table.getTableHeader().setReorderingAllowed(false);
+	    
+	    //Calls the function when the row is selected
+	    table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRow() != -1)
+					textField.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+			}
+		});
+	    
+	    return table;
+	}
+	
+	//Inserts the rows in the table from the database
+	private void insertTableData() {
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		ArrayList<Book> books = Book.getFreeBooks();
+		
+		for(Book b : books) {
+			Object[] data = new Object[6];
+			data[0] = b.getIsbn();
+			data[1] = b.getName();
+			data[2] = b.getCategory();
+			data[3] = b.getPrice();
+			data[4] = b.getAuthor();
+			data[5] = b.getYear();
+			tableModel.addRow(data);
+		}
+		table.setModel(tableModel);
 	}
 }

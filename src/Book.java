@@ -84,7 +84,7 @@ public class Book {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
-							+ "JOIN author ON author.id = book.author_id");
+							+ "JOIN author ON author.id = book.author_id ORDER BY book.name;");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);
@@ -111,8 +111,9 @@ public class Book {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
-							+ "JOIN author ON author.id = book.author_id\r\n"
-							+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn);");
+					+ "JOIN author ON author.id = book.author_id\r\n"
+					+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn)\r\n"
+					+ "ORDER BY book.name;");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);

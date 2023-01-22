@@ -19,6 +19,11 @@ import javax.swing.JPasswordField;
 
 public class SignIn extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -63,7 +68,7 @@ public class SignIn extends JFrame {
 		panel.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 15));
 
-		JLabel lblNewLabel = new JLabel("Plese insert your name:");
+		JLabel lblNewLabel = new JLabel("Please insert your name:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		panel_2.add(lblNewLabel);
 
@@ -122,7 +127,7 @@ public class SignIn extends JFrame {
 		panel.add(panel_6);
 		panel_6.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 12));
 
-		JLabel lblNewLabel_2 = new JLabel("Insert your phone-number:");
+		JLabel lblNewLabel_2 = new JLabel("Insert your phone number:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		panel_6.add(lblNewLabel_2);
 
