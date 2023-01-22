@@ -133,7 +133,8 @@ public class Book {
 
 	public static boolean addBook(String isbn, String name, String category, double price, int author, int year) {
 		Pattern regexISBN = Pattern.compile("^\\d{10,13}$");
-		if (regexISBN.matcher(isbn).matches() && name.length() != 0 && category.length() != 0) {
+		boolean condition = regexISBN.matcher(isbn).matches() && name.length() != 0 && category.length() != 0;
+		if (condition) {
 			try {
 				Connection con = JDBCConnection.getConnection();
 				Statement stmt = con.createStatement();

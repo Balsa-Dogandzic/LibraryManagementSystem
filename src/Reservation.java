@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -59,6 +60,21 @@ public class Reservation {
 		} catch (Exception e) {
 			System.out.println("Greska sa bazom.");
 			return null;
+		}
+	}
+
+	public static boolean addReservation(int readerId, String isbn, String reservationDate, String returnDate) {
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "INSERT INTO reservation (reader_id,book_id,date_of_reservation,return_date) VALUES ("
+					+ readerId + ",'" + isbn + "','" + reservationDate + "','" + returnDate + "');";
+
+			stmt.execute(query);
+			return true;
+
+		} catch (SQLException e) {
+			return false;
 		}
 	}
 

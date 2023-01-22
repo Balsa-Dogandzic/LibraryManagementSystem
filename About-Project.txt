@@ -1,14 +1,15 @@
 -Employee page da se uradi 
-(dugme za dodavanje novih radnika,tabela sa rezervacijama, dugme za dodavanje nove knjige,)
 
 - Da se mozda klase odvoje u razlicite pakete zbog organizacije koda ?
 
 - Screen za slobodne knjige
-
-- Screen za rezervacije-Employee page 
 
 - Screen za reservisanje-Userpage
 
 - Poseban screen za knjige za usera i zaposlenog
 
 -Da se napravi poseban bookscreen za readera samo  tabela
+
+- Da se napravi automatski refresh tabele na AddReservationScreen, i regex za date
+
+- Jos uslova na Book.java?
