@@ -133,12 +133,12 @@ public class Book {
 
 	public static boolean addBook(String isbn, String name, String category, double price, int author, int year) {
 		Pattern regexISBN = Pattern.compile("^\\d{10,13}$");
-		if(regexISBN.matcher(isbn).matches() && name.length() != 0 && category.length() != 0) {
+		if (regexISBN.matcher(isbn).matches() && name.length() != 0 && category.length() != 0) {
 			try {
 				Connection con = JDBCConnection.getConnection();
 				Statement stmt = con.createStatement();
-				String query = "INSERT INTO book (isbn,name,category,price,author_id,year_of_publication) VALUES ('" + isbn + "','" + name
-						+ "','" + category + "'," + price + "," + author + "," + year + ")";
+				String query = "INSERT INTO book (isbn,name,category,price,author_id,year_of_publication) VALUES ('"
+						+ isbn + "','" + name + "','" + category + "'," + price + "," + author + "," + year + ")";
 
 				stmt.execute(query);
 				return true;

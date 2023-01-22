@@ -36,18 +36,18 @@ public class Author {
 	public String toString() {
 		return name;
 	}
-	
+
 	public static ArrayList<Author> getAuthors() {
-		//Returns a list of authors from the database
+		// Returns a list of authors from the database
 		ArrayList<Author> authors = new ArrayList<Author>();
-		
+
 		try {
 			Connection conn = JDBCConnection.getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id, name FROM author");
 			Author a;
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				a = new Author(rs.getInt(1), rs.getString(2));
 				authors.add(a);
 			}
@@ -55,10 +55,10 @@ public class Author {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return authors;
 	}
-	
+
 	public static boolean addAuthor(String name) {
 		Pattern nameRegex = Pattern.compile("^[\\p{Lu}\\p{M}][\\p{L}\\p{M},.'-]+(?: [\\p{L}\\p{M},.'-]+)*$");
 		if (nameRegex.matcher(name).matches()) {

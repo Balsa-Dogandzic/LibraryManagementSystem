@@ -10,3 +10,5 @@
 - Screen za reservisanje-Userpage
 
 - Poseban screen za knjige za usera i zaposlenog
+
+-Da se napravi poseban bookscreen za readera samo  tabela

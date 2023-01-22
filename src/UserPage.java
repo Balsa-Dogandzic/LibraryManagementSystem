@@ -114,7 +114,7 @@ public class UserPage extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(270, 300));
 		JTable table = new JTable();
-
+		table.getTableHeader().setReorderingAllowed(false);
 		ArrayList<Reservation> reservations = Reservation.getReservation(LoginScreen.getEmail());
 		Object[][] rowData = new Object[reservations.size()][3];
 		for (int i = 0; i < rowData.length; i++) {
