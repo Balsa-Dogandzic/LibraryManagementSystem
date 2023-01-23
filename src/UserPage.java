@@ -59,8 +59,11 @@ public class UserPage extends JFrame {
 	 * Create the frame.
 	 */
 	public UserPage() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super("User page");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 611, 446);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,8 +94,7 @@ public class UserPage extends JFrame {
 		JButton btnNewButton = new JButton("Available Books");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BooksScreen bs = new BooksScreen();
-				bs.main(null);
+				BookCatalogue.main(null);
 				dispose();
 			}
 		});

@@ -64,18 +64,21 @@ public class Reservation {
 	}
 
 	public static boolean addReservation(int readerId, String isbn, String reservationDate, String returnDate) {
-		try {
-			Connection con = JDBCConnection.getConnection();
-			Statement stmt = con.createStatement();
-			String query = "INSERT INTO reservation (reader_id,book_id,date_of_reservation,return_date) VALUES ("
-					+ readerId + ",'" + isbn + "','" + reservationDate + "','" + returnDate + "');";
+		if (isbn.length() == 0) {
+			try {
+				Connection con = JDBCConnection.getConnection();
+				Statement stmt = con.createStatement();
+				String query = "INSERT INTO reservation (reader_id,book_id,date_of_reservation,return_date) VALUES ("
+						+ readerId + ",'" + isbn + "','" + reservationDate + "','" + returnDate + "');";
 
-			stmt.execute(query);
-			return true;
+				stmt.execute(query);
+				return true;
 
-		} catch (SQLException e) {
-			return false;
+			} catch (SQLException e) {
+				return false;
+			}
 		}
+		return false;
 	}
 
 }

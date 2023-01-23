@@ -155,6 +155,7 @@ public class LoginScreen {
 				String text2 = String.valueOf(textField_2.getPassword());
 				if (rdbtnNewRadioButton.isSelected()) {
 					if (Login.validateEmployee(text1, text2)) {
+						//Should open employee page
 						JOptionPane.showMessageDialog(null, "Employee authorized", "Message",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
@@ -163,8 +164,7 @@ public class LoginScreen {
 					}
 				} else {
 					if (Login.validateReader(text1, text2)) {
-						UserPage up = new UserPage();
-						up.initialize();
+						UserPage.main(null);
 						frame.dispose();
 
 					} else {

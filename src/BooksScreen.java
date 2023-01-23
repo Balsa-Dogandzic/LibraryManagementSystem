@@ -1,15 +1,23 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 public class BooksScreen {
 
@@ -17,9 +25,11 @@ public class BooksScreen {
 	private JPanel panel_1;
 	private JTable table;
 	private JPanel panel;
-	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private JTextField textField;
+	private JButton btnNewButton;
+	private JButton btnExcel;
 
 	/**
 	 * Launch the application.
@@ -48,7 +58,7 @@ public class BooksScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Free books");
+		frame = new JFrame("Book catalogue");
 		frame.setBounds(100, 100, 706, 408);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -61,7 +71,7 @@ public class BooksScreen {
 		table = new JTable();
 		// Fetching data for table rows
 		table.getTableHeader().setReorderingAllowed(false);
-		ArrayList<Book> books = Book.getFreeBooks();
+		ArrayList<Book> books = Book.getAllBooks();
 		Object[][] rowData = new Object[books.size()][6];
 		for (int i = 0; i < rowData.length; i++) {
 			rowData[i][0] = books.get(i).getIsbn();
@@ -94,20 +104,15 @@ public class BooksScreen {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		// Adding the table in the JScrollPane
-		JScrollPane sp = new JScrollPane(table);
-
-		panel_1.add(sp);
+		panel_1.setLayout(null);
 
 		panel = new JPanel();
-		panel_1.add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(8, 1, 3, 3));
-
-		btnNewButton = new JButton("Choose a book");
-		panel.add(btnNewButton);
+		panel.setBounds(0, 0, 692, 131);
+		panel_1.add(panel);
+		panel.setLayout(null);
 
 		btnNewButton_1 = new JButton("Add book");
+		btnNewButton_1.setBounds(131, 69, 111, 33);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,13 +124,64 @@ public class BooksScreen {
 
 		// Go back button, should add the home screen to go back to
 		btnNewButton_2 = new JButton("Go back");
+		btnNewButton_2.setBounds(10, 69, 111, 33);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//Should open a employee window
 				frame.dispose();
 			}
 		});
 		panel.add(btnNewButton_2);
-	}
 
+		JLabel lblNewLabel = new JLabel("List of all books");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(10, 10, 672, 49);
+		panel.add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size());
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(609, 10, 73, 33);
+		panel.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBorder(new LineBorder(new Color(171, 173, 179)));
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String query = textField.getText();
+				filter(query);
+			}
+		});
+		textField.setBounds(498, 83, 184, 19);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Search a book:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_2.setBounds(498, 64, 138, 19);
+		panel.add(lblNewLabel_2);
+		
+		btnNewButton = new JButton("Delete book");
+		btnNewButton.setBounds(252, 69, 111, 33);
+		panel.add(btnNewButton);
+		
+		btnExcel = new JButton("Excel");
+		btnExcel.setBounds(373, 69, 111, 33);
+		panel.add(btnExcel);
+		
+		// Adding the table in the JScrollPane
+		JScrollPane sp = new JScrollPane(table);
+		sp.setBounds(0, 133, 692, 238);
+
+		panel_1.add(sp);
+	}
+	
+	private void filter(String query) {
+		//Method for table filtering
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+		table.setRowSorter(sorter);
+		sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query));//Case insensitive
+	}
 }

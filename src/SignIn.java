@@ -155,6 +155,8 @@ public class SignIn extends JFrame {
 				if (l.addUser(name, email, password, phone_number)) {
 					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
+					LoginScreen.main(null);
+					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message",
 							JOptionPane.ERROR_MESSAGE);

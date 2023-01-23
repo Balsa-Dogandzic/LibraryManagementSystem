@@ -5,7 +5,7 @@ public class Test {
 	public void test() {
 		WelcomeScreen w = new WelcomeScreen();
 		w.initialize();
-
+		
 		//Author regex test
 //		String s = "balsa Dogandzic";
 //		String s1 = "Armirat Bair Hossan";
