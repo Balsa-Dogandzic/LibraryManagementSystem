@@ -111,9 +111,9 @@ public class Book {
 
 			ResultSet rs = stmt.executeQuery(
 					"SELECT book.isbn, book.name, book.category, book.price, author.name, book.year_of_publication FROM book\r\n"
-					+ "JOIN author ON author.id = book.author_id\r\n"
-					+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn)\r\n"
-					+ "ORDER BY book.name;");
+							+ "JOIN author ON author.id = book.author_id\r\n"
+							+ "WHERE book.isbn NOT IN (SELECT DISTINCT book.isbn FROM book JOIN reservation ON reservation.book_id = book.isbn)\r\n"
+							+ "ORDER BY book.name;");
 			ArrayList<Book> books = new ArrayList<Book>();
 			while (rs.next()) {
 				String isbn = rs.getString(1);
@@ -150,5 +150,32 @@ public class Book {
 			}
 		}
 		return false;
+	}
+
+	public static ArrayList<Book> arrayList<Reader> reservedBooks() {
+
+		try {
+			Connection conn = JDBCConnection.getConnection();
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(
+					"SELECT reservation.book_id,reader.name,reader.phone_number,reservation.date_of_reservation,reservation.return_date FROM `reservation`,reader WHERE reservation.reader_id = reader.id ORDER BY return_date");
+			ArrayList<Book> books = new ArrayList<Book>();
+			while (rs.next()) {
+				String isbn = rs.getString(1);
+				String name = rs.getString(2);
+				String category = rs.getString(3);
+				double price = rs.getDouble(4);
+				String author = rs.getString(5);
+				int year = rs.getInt(6);
+				books.add(new Book(isbn, name, category, price, author, year));
+			}
+			return books;
+
+		} catch (Exception e) {
+			System.out.println("Greska sa bazom.");
+			return null;
+		}
+
 	}
 }
