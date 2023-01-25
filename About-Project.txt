@@ -1,13 +1,11 @@
--Employee page da se uradi 
-
 - Screen za reservisanje-Userpage
 
 -Da se napravi poseban bookscreen za readera samo  tabela
 
 - Jos uslova na Book.java?
 
-- Da se ubaci kod za pokretanje employee screen-a tamo gdje treba (LoginScreen, AddReservationScreen, BooksScreen)
-
 - BookCatalogue je screen za user-a, a BooksScreen je za employee-a
 
 - Da se urade delete i excel dugme na BooksScreen?
+
+- Da se dovrsi projekat

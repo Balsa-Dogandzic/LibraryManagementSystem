@@ -78,7 +78,7 @@ public class AddAuthorScreen {
 				//Inserts the author and asks the user if he wants to enter more authors
 				String name = textField.getText();
 				if (Author.addAuthor(name)) {
-					int option = JOptionPane.showConfirmDialog(null,
+					int option = JOptionPane.showConfirmDialog(frame,
 							"Author successfully added. Do you want to add the book now?", "Message",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if (option == 0) {
@@ -86,7 +86,7 @@ public class AddAuthorScreen {
 						frame.dispose();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "Invalid data format", "Message", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Invalid data format", "Message", JOptionPane.ERROR_MESSAGE);
 				}	
 			}
 		});

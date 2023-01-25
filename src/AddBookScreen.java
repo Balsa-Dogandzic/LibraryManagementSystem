@@ -192,23 +192,27 @@ public class AddBookScreen {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String isbn = textField.getText();
-				String name = textField_1.getText();
-				String category = textField_2.getText();
-				double price = Double.parseDouble(textField_3.getText());
-				Author a = (Author) comboBox.getSelectedItem();
-				// Takes a author id
-				int author_id = a.getId();
-				int year = Integer.parseInt(textField_4.getText());
+				try {
+					String isbn = textField.getText();
+					String name = textField_1.getText();
+					String category = textField_2.getText();
+					double price = Double.parseDouble(textField_3.getText());
+					Author a = (Author) comboBox.getSelectedItem();
+					// Takes a author id
+					int author_id = a.getId();
+					int year = Integer.parseInt(textField_4.getText());
 
-				if (Book.addBook(isbn, name, category, price, author_id, year)) {
-					JOptionPane.showMessageDialog(null, "Book successfully added", "Message",
-							JOptionPane.INFORMATION_MESSAGE);
-					BooksScreen.main(null);
-					frame.dispose();
-					return;
+					if (Book.addBook(isbn, name, category, price, author_id, year)) {
+						JOptionPane.showMessageDialog(frame, "Book successfully added", "Message",
+								JOptionPane.INFORMATION_MESSAGE);
+						BooksScreen.main(null);
+						frame.dispose();
+						return;
+					}
+					JOptionPane.showMessageDialog(frame, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(frame, "You didn't enter a price or year", "Message", JOptionPane.ERROR_MESSAGE);
 				}
-				JOptionPane.showMessageDialog(null, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		panel_2.add(btnNewButton_1);

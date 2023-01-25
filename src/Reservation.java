@@ -64,7 +64,6 @@ public class Reservation {
 	}
 
 	public static boolean addReservation(int readerId, String isbn, String reservationDate, String returnDate) {
-		if (isbn.length() == 0) {
 			try {
 				Connection con = JDBCConnection.getConnection();
 				Statement stmt = con.createStatement();
@@ -77,8 +76,6 @@ public class Reservation {
 			} catch (SQLException e) {
 				return false;
 			}
-		}
-		return false;
 	}
 
 }

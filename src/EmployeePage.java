@@ -1,6 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
+import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +12,11 @@ import javax.swing.JButton;
 
 public class EmployeePage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTable table;
 
@@ -35,8 +40,10 @@ public class EmployeePage extends JFrame {
 	 * Create the frame.
 	 */
 	public EmployeePage() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 558, 484);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -51,6 +58,13 @@ public class EmployeePage extends JFrame {
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("all books");
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BooksScreen.main(null);
+				dispose();
+			}
+		});
 		btnNewButton.setBounds(20, 61, 85, 21);
 		panel.add(btnNewButton);
 		
@@ -63,6 +77,13 @@ public class EmployeePage extends JFrame {
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("reserve a book");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AddReservationScreen.main(null);
+				dispose();
+			}
+		});
 		btnNewButton_3.setBounds(88, 128, 85, 21);
 		panel.add(btnNewButton_3);
 		
@@ -71,6 +92,13 @@ public class EmployeePage extends JFrame {
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("log out");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LoginScreen.main(null);
+				dispose();
+			}
+		});
 		btnNewButton_5.setBounds(425, 128, 85, 21);
 		panel.add(btnNewButton_5);
 		

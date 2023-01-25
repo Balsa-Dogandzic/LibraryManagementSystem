@@ -155,11 +155,10 @@ public class LoginScreen {
 				String text2 = String.valueOf(textField_2.getPassword());
 				if (rdbtnNewRadioButton.isSelected()) {
 					if (Login.validateEmployee(text1, text2)) {
-						//Should open employee page
-						JOptionPane.showMessageDialog(null, "Employee authorized", "Message",
-								JOptionPane.INFORMATION_MESSAGE);
+						EmployeePage.main(null);
+						frame.dispose();
 					} else {
-						JOptionPane.showMessageDialog(null, "Invalid credentials", "Message",
+						JOptionPane.showMessageDialog(frame, "Invalid credentials", "Message",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else {
@@ -168,7 +167,7 @@ public class LoginScreen {
 						frame.dispose();
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Invalid credentials", "Message",
+						JOptionPane.showMessageDialog(frame, "Invalid credentials", "Message",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				}

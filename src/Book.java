@@ -151,31 +151,4 @@ public class Book {
 		}
 		return false;
 	}
-
-	public static ArrayList<Book> arrayList<Reader> reservedBooks() {
-
-		try {
-			Connection conn = JDBCConnection.getConnection();
-			Statement stmt = conn.createStatement();
-
-			ResultSet rs = stmt.executeQuery(
-					"SELECT reservation.book_id,reader.name,reader.phone_number,reservation.date_of_reservation,reservation.return_date FROM `reservation`,reader WHERE reservation.reader_id = reader.id ORDER BY return_date");
-			ArrayList<Book> books = new ArrayList<Book>();
-			while (rs.next()) {
-				String isbn = rs.getString(1);
-				String name = rs.getString(2);
-				String category = rs.getString(3);
-				double price = rs.getDouble(4);
-				String author = rs.getString(5);
-				int year = rs.getInt(6);
-				books.add(new Book(isbn, name, category, price, author, year));
-			}
-			return books;
-
-		} catch (Exception e) {
-			System.out.println("Greska sa bazom.");
-			return null;
-		}
-
-	}
 }

@@ -118,7 +118,7 @@ public class AddReservationScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Should open a employee window
+				EmployeePage.main(null);
 				frame.dispose();
 			}
 		});
@@ -137,17 +137,21 @@ public class AddReservationScreen {
 				String returnDate = textField_1.getText();
 				
 				if(Reservation.addReservation(readerId, isbn, reserveDate, returnDate)) {
-					JOptionPane.showMessageDialog(null, "Book reserved successfully", "Message",
-							JOptionPane.INFORMATION_MESSAGE);
+					int option = JOptionPane.showConfirmDialog(frame, "Book reserved successfully. Are you done with the reservations?", "Message",
+							JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					if (table.getSelectedRow() != -1) {
 						tableModel.removeRow(table.getSelectedRow());
 						textField.setText("");
 					}
-					//Add code to return the user back to employee page
+					if(option == 0) {
+						EmployeePage.main(null);
+						frame.dispose();
+						return;
+					}
 					return;
 				}
-				JOptionPane.showMessageDialog(null, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		panel.add(btnReserve);

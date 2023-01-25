@@ -128,7 +128,7 @@ public class BooksScreen {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Should open a employee window
+				EmployeePage.main(null);
 				frame.dispose();
 			}
 		});

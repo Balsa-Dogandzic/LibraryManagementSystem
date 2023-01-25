@@ -80,7 +80,7 @@ public class WelcomeScreen extends JFrame {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panel_1.add(panel_3);
 
-		JButton btnNewButton = new JButton("Log-in");
+		JButton btnNewButton = new JButton("Log in");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginScreen.main(null);
@@ -97,7 +97,7 @@ public class WelcomeScreen extends JFrame {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panel_1.add(panel_2);
 
-		JButton btnNewButton_1 = new JButton("Sign in ");
+		JButton btnNewButton_1 = new JButton("Sign in");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SignIn si = new SignIn();
