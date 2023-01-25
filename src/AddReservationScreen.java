@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -175,9 +176,9 @@ public class AddReservationScreen {
 		});
 		panel.add(textField_1);
 		
-		JLabel lblNewLabel_4 = new JLabel("Date: " + String.valueOf(new Date(System.currentTimeMillis())));
+		JLabel lblNewLabel_4 = new JLabel("Date: " + String.valueOf(new Date(System.currentTimeMillis())),SwingConstants.RIGHT);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_4.setBounds(536, 10, 94, 21);
+		lblNewLabel_4.setBounds(501, 10, 129, 21);
 		panel.add(lblNewLabel_4);
 	}
 	

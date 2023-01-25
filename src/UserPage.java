@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -8,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
 import java.awt.event.ActionListener;
 
 public class UserPage extends JFrame {
@@ -34,10 +31,8 @@ public class UserPage extends JFrame {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JTable table;
-	private JTable table_1;
 	private JScrollPane scrollPane;
 	private JLabel lblNewLabel_1;
-	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -77,7 +72,7 @@ public class UserPage extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 
 		lblNewLabel = new JLabel("Welcome:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblNewLabel);
 
 		lblNewLabel_1 = new JLabel(LoginScreen.getName());
@@ -91,17 +86,19 @@ public class UserPage extends JFrame {
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 
-		JButton btnNewButton = new JButton("Available Books");
+		JButton btnNewButton = new JButton("Catalogue");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BookCatalogue.main(null);
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(87, 34, 85, 21);
+		btnNewButton.setBounds(77, 35, 120, 30);
 		panel_2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Log out");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WelcomeScreen ws = new WelcomeScreen();
@@ -109,18 +106,20 @@ public class UserPage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(87, 98, 85, 21);
+		btnNewButton_1.setBounds(77, 146, 120, 30);
 		panel_2.add(btnNewButton_1);
+		
+		JButton btnRequestABook = new JButton("Request");
+		btnRequestABook.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnRequestABook.setBounds(77, 91, 120, 30);
+		panel_2.add(btnRequestABook);
 
 		panel_3 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
-		flowLayout_1.setVgap(0);
-		flowLayout_1.setHgap(0);
 		panel_1.add(panel_3);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(270, 300));
-		JTable table = new JTable();
+		table = new JTable();
 		table.getTableHeader().setReorderingAllowed(false);
 		ArrayList<Reservation> reservations = Reservation.getReservation(LoginScreen.getEmail());
 		Object[][] rowData = new Object[reservations.size()][3];
@@ -129,7 +128,7 @@ public class UserPage extends JFrame {
 			rowData[i][1] = reservations.get(i).getDate_of_reservation();
 			rowData[i][2] = reservations.get(i).getReturn_date();
 		}
-		table.setModel(new DefaultTableModel(rowData, new String[] { "isbn", "Date of Reservation", "Return Date" }) {
+		table.setModel(new DefaultTableModel(rowData, new String[] { "isbn", "Issue date", "Return Date" }) {
 			/**
 			 * 
 			 */
@@ -147,6 +146,7 @@ public class UserPage extends JFrame {
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		table.setPreferredSize(new Dimension(247, 270));
 		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		table.setMinimumSize(new Dimension(247, 231));
@@ -157,15 +157,5 @@ public class UserPage extends JFrame {
 
 	public void initialize() {
 		this.setVisible(true);
-	}
-
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 }

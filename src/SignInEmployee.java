@@ -136,31 +136,39 @@ public class SignInEmployee extends JFrame {
 		flowLayout_5.setAlignment(FlowLayout.RIGHT);
 		panel_1.add(panel_8);
 
-		JButton btnNewButton = new JButton("Submit");
+		JButton btnNewButton = new JButton("Go back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EmployeePage.main(null);
+				dispose();
+			}
+		});
+		
+		JButton btnNewButton_1 = new JButton("Submit");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				Login l = new Login();
-			
+				
 				if (l.addWorker(textField.getText(), textField_1.getText())) {
 					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
+					EmployeePage.main(null);
+					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message",
 							JOptionPane.ERROR_MESSAGE);
 				}
-				notInitialeze();
 			}
 		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		panel_8.add(btnNewButton_1);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		panel_8.add(btnNewButton);
 	}
 
 	public void initialize() {
 		this.setVisible(true);
-	}
-
-	public void notInitialeze() {
-		this.setVisible(false);
 	}
 
 }

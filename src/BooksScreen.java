@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 public class BooksScreen {
@@ -104,6 +105,8 @@ public class BooksScreen {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		panel_1.setLayout(null);
 
 		panel = new JPanel();

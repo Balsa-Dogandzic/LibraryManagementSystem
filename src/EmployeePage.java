@@ -4,11 +4,13 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.Dimension;
+import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class EmployeePage extends JFrame {
 
@@ -36,12 +38,56 @@ public class EmployeePage extends JFrame {
 		});
 	}
 
+	private JTable createTable() {
+		String[] colName = { "reader","phone","email","isbn", "name", "issue_date", "return_date"};
+	    if (table == null) {
+	        table = new JTable() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				//Disables cell editing
+				public boolean isCellEditable(int nRow, int nCol) {
+	                return false;
+	            }
+	        };
+	    }
+		
+	    DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
+	    contactTableModel.setColumnIdentifiers(colName);
+	    
+	    //Disables resizing the columns
+	    table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setResizable(false);
+		table.getColumnModel().getColumn(4).setPreferredWidth(120);
+		table.getColumnModel().getColumn(5).setResizable(false);
+		table.getColumnModel().getColumn(6).setResizable(false);
+		
+		//Allows selection of only one row
+	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    table.getTableHeader().setReorderingAllowed(false);
+	    
+	    return table;
+	}
+	
+	private void insertTableData() {
+		//Should fill the data in the table, see BookCatalogue class for the same method
+	}
+	
 	/**
 	 * Create the frame.
 	 */
 	public EmployeePage() {
+		super("Employee screen");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 558, 484);
+		setBounds(100, 100, 608, 484);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -54,7 +100,8 @@ public class EmployeePage extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Your Bookstore");
-		lblNewLabel.setBounds(221, 10, 85, 13);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(20, 11, 490, 30);
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("all books");
@@ -65,18 +112,14 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(20, 61, 85, 21);
+		btnNewButton.setBounds(20, 52, 120, 30);
 		panel.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("add book");
-		btnNewButton_1.setBounds(168, 61, 85, 21);
-		panel.add(btnNewButton_1);
-		
 		JButton btnNewButton_2 = new JButton("request");
-		btnNewButton_2.setBounds(317, 61, 85, 21);
+		btnNewButton_2.setBounds(440, 52, 120, 30);
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("reserve a book");
+		JButton btnNewButton_3 = new JButton("reservation");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -84,31 +127,41 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_3.setBounds(88, 128, 85, 21);
+		btnNewButton_3.setBounds(20, 118, 120, 30);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("return a book");
-		btnNewButton_4.setBounds(250, 128, 85, 21);
+		btnNewButton_4.setBounds(230, 52, 120, 30);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("log out");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LoginScreen.main(null);
+				WelcomeScreen.main(null);
 				dispose();
 			}
 		});
-		btnNewButton_5.setBounds(425, 128, 85, 21);
+		btnNewButton_5.setBounds(440, 118, 120, 30);
 		panel.add(btnNewButton_5);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 184, 490, 219);
+		table = createTable();
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(0, 170, 582, 265);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setBounds(20, 184, 488, 216);
-		panel.add(table);
-		table.setPreferredSize(new Dimension(200, 216));
+		JButton btnNewButton_3_1 = new JButton("new employee");
+		btnNewButton_3_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SignInEmployee.main(null);
+				dispose();
+			}
+		});
+		btnNewButton_3_1.setBounds(230, 122, 120, 30);
+		panel.add(btnNewButton_3_1);
+		
+		
 	}
 }
