@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -65,6 +66,25 @@ public class Reader {
 		} catch (Exception e) {
 			System.out.println("Greska sa bazom.");
 			return null;
+		}
+	}
+	
+	public static Reader getReader(String email) {
+		Reader r = new Reader(0,"","","");
+		try {
+			Connection conn = JDBCConnection.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT id,name,email,phone_number FROM reader WHERE email='" + email + "'");
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				String phoneNumber = rs.getString(4);
+				r = new Reader(id,name,email,phoneNumber);
+			}
+			return r;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return r;
 		}
 	}
 		

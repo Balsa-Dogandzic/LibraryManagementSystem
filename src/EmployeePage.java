@@ -127,7 +127,7 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_3.setBounds(20, 118, 120, 30);
+		btnNewButton_3.setBounds(20, 107, 120, 30);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("return a book");
@@ -142,7 +142,7 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_5.setBounds(440, 118, 120, 30);
+		btnNewButton_5.setBounds(440, 107, 120, 30);
 		panel.add(btnNewButton_5);
 		
 		table = createTable();
@@ -159,7 +159,7 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_3_1.setBounds(230, 122, 120, 30);
+		btnNewButton_3_1.setBounds(230, 107, 120, 30);
 		panel.add(btnNewButton_3_1);
 		
 		

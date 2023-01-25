@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -147,18 +148,22 @@ public class SignIn extends JFrame {
 		btnNewButton.setBounds(20, 10, 75, 26);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login l = new Login();
 				String name = textField.getText();
 				String email = textField_1.getText();
 				String phone_number = textField_2.getText();
 				String password = String.valueOf(passwordField.getPassword());
-				if (l.addUser(name, email, password, phone_number)) {
+				ArrayList<String> errors = Login.addReader(name, email, password, phone_number);
+				if (errors == null) {
 					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
 					LoginScreen.main(null);
 					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message",
+					String s = "";
+					for(String error:errors) {
+						s += String.format("- %s\n", error);
+					}
+					JOptionPane.showMessageDialog(null, s, "Message",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}

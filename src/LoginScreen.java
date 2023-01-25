@@ -21,17 +21,14 @@ public class LoginScreen {
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField textField_2;
-	private static String name;
-	private static String email;
+//	private static String name;
+//	private static String email;
+	private static Reader reader;
 
-	public static String getName() {
-		return name;
+	public static Reader getReader() {
+		return reader;
 	}
-
-	public static String getEmail() {
-		return email;
-	}
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -149,10 +146,11 @@ public class LoginScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text1 = textField.getText();
-				email = text1;
-				String[] separeted = text1.split("@");
-				name = separeted[0];
+//				email = text1;
+//				String[] separeted = text1.split("@");
+//				name = separeted[0];
 				String text2 = String.valueOf(textField_2.getPassword());
+				reader = Reader.getReader(text1);
 				if (rdbtnNewRadioButton.isSelected()) {
 					if (Login.validateEmployee(text1, text2)) {
 						EmployeePage.main(null);

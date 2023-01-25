@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class BooksScreen {
 
@@ -105,7 +108,18 @@ public class BooksScreen {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
+		
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (table.getSelectedRow() != -1)
+					btnNewButton.setEnabled(true);
+				else
+					btnNewButton.setEnabled(false);
+			}
+		});
 		
 		panel_1.setLayout(null);
 
@@ -142,9 +156,9 @@ public class BooksScreen {
 		lblNewLabel.setBounds(10, 10, 672, 49);
 		panel.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size());
+		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size(),SwingConstants.RIGHT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(609, 10, 73, 33);
+		lblNewLabel_1.setBounds(552, 10, 130, 33);
 		panel.add(lblNewLabel_1);
 		
 		textField = new JTextField();
@@ -167,6 +181,7 @@ public class BooksScreen {
 		
 		btnNewButton = new JButton("Delete book");
 		btnNewButton.setBounds(252, 69, 111, 33);
+		btnNewButton.setEnabled(false);
 		panel.add(btnNewButton);
 		
 		btnExcel = new JButton("Excel");

@@ -13,7 +13,6 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,7 +31,6 @@ public class UserPage extends JFrame {
 	private JPanel panel_3;
 	private JTable table;
 	private JScrollPane scrollPane;
-	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -71,12 +69,9 @@ public class UserPage extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
 
-		lblNewLabel = new JLabel("Welcome:");
+		lblNewLabel = new JLabel("Welcome " + LoginScreen.getReader().getName());
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblNewLabel);
-
-		lblNewLabel_1 = new JLabel(LoginScreen.getName());
-		panel.add(lblNewLabel_1);
 
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -87,7 +82,7 @@ public class UserPage extends JFrame {
 		panel_2.setLayout(null);
 
 		JButton btnNewButton = new JButton("Catalogue");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BookCatalogue.main(null);
@@ -98,7 +93,7 @@ public class UserPage extends JFrame {
 		panel_2.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Log out");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WelcomeScreen ws = new WelcomeScreen();
@@ -110,7 +105,7 @@ public class UserPage extends JFrame {
 		panel_2.add(btnNewButton_1);
 		
 		JButton btnRequestABook = new JButton("Request");
-		btnRequestABook.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnRequestABook.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRequestABook.setBounds(77, 91, 120, 30);
 		panel_2.add(btnRequestABook);
 
@@ -121,7 +116,7 @@ public class UserPage extends JFrame {
 		scrollPane.setPreferredSize(new Dimension(270, 300));
 		table = new JTable();
 		table.getTableHeader().setReorderingAllowed(false);
-		ArrayList<Reservation> reservations = Reservation.getReservation(LoginScreen.getEmail());
+		ArrayList<Reservation> reservations = Reservation.getReservation(LoginScreen.getReader().getEmail());
 		Object[][] rowData = new Object[reservations.size()][3];
 		for (int i = 0; i < rowData.length; i++) {
 			rowData[i][0] = reservations.get(i).getBook_id();
@@ -148,7 +143,7 @@ public class UserPage extends JFrame {
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
 		table.setPreferredSize(new Dimension(247, 270));
-		table.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		table.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		table.setMinimumSize(new Dimension(247, 231));
 		scrollPane.setViewportView(table);
 		panel_3.add(scrollPane);

@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -15,7 +16,10 @@ import javax.swing.JTextPane;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class SignInEmployee extends JFrame {
 
@@ -26,7 +30,7 @@ public class SignInEmployee extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 
 	/**
 	 * Launch the application.
@@ -79,7 +83,7 @@ public class SignInEmployee extends JFrame {
 
 		textField = new JTextField();
 		panel_3.add(textField);
-		textField.setColumns(10);
+		textField.setColumns(16);
 
 		JPanel panel_4 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_4.getLayout();
@@ -99,9 +103,9 @@ public class SignInEmployee extends JFrame {
 		flowLayout_2.setAlignment(FlowLayout.LEFT);
 		panel.add(panel_5);
 
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		panel_5.add(textField_1);
-		textField_1.setColumns(10);
+		textField_1.setColumns(16);
 
 		JPanel panel_6 = new JPanel();
 		FlowLayout flowLayout_3 = (FlowLayout) panel_6.getLayout();
@@ -126,6 +130,7 @@ public class SignInEmployee extends JFrame {
 		panel_1.add(panel_7);
 
 		JTextPane textPane = new JTextPane();
+		textPane.setBorder(new LineBorder(new Color(192, 192, 192)));
 		panel_7.add(textPane);
 		textPane.setPreferredSize(new Dimension(130, 35));
 
@@ -148,15 +153,21 @@ public class SignInEmployee extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Login l = new Login();
+				String username = textField.getText();
+				String password = String.valueOf(textField_1.getPassword());
+				ArrayList<String> errors = Login.addWorker(username, password);
 				
-				if (l.addWorker(textField.getText(), textField_1.getText())) {
-					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
+				if (errors == null) {
+					JOptionPane.showMessageDialog(contentPane, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
 					EmployeePage.main(null);
 					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "You inserted wrong data", "Message",
+					String s = "";
+					for (String error: errors) {
+						s += String.format("- %s\n", error);
+					}
+					JOptionPane.showMessageDialog(contentPane, s, "Message",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
