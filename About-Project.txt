@@ -2,8 +2,8 @@
 
 - Jos uslova na Book.java?
 
-- BookCatalogue je screen za user-a, a BooksScreen je za employee-a
+- BookCatalogue je screen za user-a, a BooksScreen je za employee-a ok Balsa 
 
-- Da se urade delete i excel dugme na BooksScreen?
+- excel dugme na BooksScreen?
 
 - Da se popuni tabela na EmployeePage(Napravio sam tijelo metode koja to treba da radi)
