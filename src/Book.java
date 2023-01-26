@@ -152,7 +152,7 @@ public class Book {
 		return false;
 	}
 
-	public boolean delete(Object id) {
+	public static boolean delete(Object id) {
 		try {
 			Connection con = JDBCConnection.getConnection();
 			Statement stmt = con.createStatement();

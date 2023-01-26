@@ -108,9 +108,9 @@ public class BooksScreen {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
-		
+
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -120,7 +120,7 @@ public class BooksScreen {
 					btnNewButton.setEnabled(false);
 			}
 		});
-		
+
 		panel_1.setLayout(null);
 
 		panel = new JPanel();
@@ -156,11 +156,11 @@ public class BooksScreen {
 		lblNewLabel.setBounds(10, 10, 672, 49);
 		panel.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size(),SwingConstants.RIGHT);
+		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size(), SwingConstants.RIGHT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(552, 10, 130, 33);
 		panel.add(lblNewLabel_1);
-		
+
 		textField = new JTextField();
 		textField.setBorder(new LineBorder(new Color(171, 173, 179)));
 		textField.addKeyListener(new KeyAdapter() {
@@ -173,33 +173,43 @@ public class BooksScreen {
 		textField.setBounds(498, 83, 184, 19);
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Search a book:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_2.setBounds(498, 64, 138, 19);
 		panel.add(lblNewLabel_2);
-		
+
 		btnNewButton = new JButton("Delete book");
 		btnNewButton.setBounds(252, 69, 111, 33);
-		btnNewButton.setEnabled(false);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
+				Object value = table.getValueAt(row, col);
+				Book.delete(value);
+				frame.dispose();
+				BooksScreen.main(null);
+			}
+		});
 		panel.add(btnNewButton);
-		
+
 		btnExcel = new JButton("Excel");
 		btnExcel.setBounds(373, 69, 111, 33);
 		panel.add(btnExcel);
-		
+
 		// Adding the table in the JScrollPane
 		JScrollPane sp = new JScrollPane(table);
 		sp.setBounds(0, 133, 692, 238);
 
 		panel_1.add(sp);
 	}
-	
+
 	private void filter(String query) {
-		//Method for table filtering
+		// Method for table filtering
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
 		table.setRowSorter(sorter);
-		sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query));//Case insensitive
+		sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query));// Case insensitive
 	}
 }
