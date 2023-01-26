@@ -151,4 +151,19 @@ public class Book {
 		}
 		return false;
 	}
+
+	public boolean delete(Object id) {
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "DELETE FROM `book` WHERE isbn = " + id;
+
+			stmt.execute(query);
+			return true;
+
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
 }

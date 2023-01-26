@@ -1,6 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +23,7 @@ public class EmployeePage extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JTable table;
 
@@ -39,26 +44,26 @@ public class EmployeePage extends JFrame {
 	}
 
 	private JTable createTable() {
-		String[] colName = { "reader","phone","email","isbn", "name", "issue_date", "return_date"};
-	    if (table == null) {
-	        table = new JTable() {
-	            /**
+		String[] colName = { "reader", "phone", "email", "isbn", "name", "issue_date", "return_date" };
+		if (table == null) {
+			table = new JTable() {
+				/**
 				 * 
 				 */
 				private static final long serialVersionUID = 1L;
 
-				//Disables cell editing
+				// Disables cell editing
 				public boolean isCellEditable(int nRow, int nCol) {
-	                return false;
-	            }
-	        };
-	    }
-		
-	    DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
-	    contactTableModel.setColumnIdentifiers(colName);
-	    
-	    //Disables resizing the columns
-	    table.getColumnModel().getColumn(0).setResizable(false);
+					return false;
+				}
+			};
+		}
+
+		DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
+		contactTableModel.setColumnIdentifiers(colName);
+
+		// Disables resizing the columns
+		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(2).setResizable(false);
@@ -69,18 +74,43 @@ public class EmployeePage extends JFrame {
 		table.getColumnModel().getColumn(4).setPreferredWidth(120);
 		table.getColumnModel().getColumn(5).setResizable(false);
 		table.getColumnModel().getColumn(6).setResizable(false);
-		
-		//Allows selection of only one row
-	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    table.getTableHeader().setReorderingAllowed(false);
-	    
-	    return table;
+
+		// Allows selection of only one row
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
+
+		return table;
 	}
-	
+
 	private void insertTableData() {
-		//Should fill the data in the table, see BookCatalogue class for the same method
+		// Should fill the data in the table, see BookCatalogue class for the same
+		// method
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		try {
+			Connection conn = JDBCConnection.getConnection();
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery(
+					"SELECT reader.id,reader.phone_number,reader.email,reservation.book_id,reader.name,reservation.date_of_reservation,reservation.return_date FROM reservation,reader WHERE reader.id = reservation.reader_id ORDER BY reservation.return_date;");
+			while (rs.next()) {
+				Object[] data = new Object[7];
+				data[0] = rs.getString(1);
+				data[1] = rs.getString(2);
+				data[2] = rs.getString(3);
+				data[3] = rs.getString(4);
+				data[4] = rs.getString(5);
+				data[5] = rs.getString(6);
+				data[6] = rs.getString(7);
+				tableModel.addRow(data);
+			}
+			table.setModel(tableModel);
+
+		} catch (Exception e) {
+			System.out.println("Greska sa bazom.");
+		}
+
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
@@ -94,16 +124,16 @@ public class EmployeePage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Your Bookstore");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(20, 11, 490, 30);
 		panel.add(lblNewLabel);
-		
+
 		JButton btnNewButton = new JButton("all books");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
@@ -114,11 +144,11 @@ public class EmployeePage extends JFrame {
 		});
 		btnNewButton.setBounds(20, 52, 120, 30);
 		panel.add(btnNewButton);
-		
+
 		JButton btnNewButton_2 = new JButton("request");
 		btnNewButton_2.setBounds(440, 52, 120, 30);
 		panel.add(btnNewButton_2);
-		
+
 		JButton btnNewButton_3 = new JButton("reservation");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			@Override
@@ -129,11 +159,21 @@ public class EmployeePage extends JFrame {
 		});
 		btnNewButton_3.setBounds(20, 107, 120, 30);
 		panel.add(btnNewButton_3);
-		
+
 		JButton btnNewButton_4 = new JButton("return a book");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
+				Object value = table.getValueAt(row, col);
+				Reservation.deleteReservation(value);
+				dispose();
+				EmployeePage.main(null);
+			}
+		});
 		btnNewButton_4.setBounds(230, 52, 120, 30);
 		panel.add(btnNewButton_4);
-		
+
 		JButton btnNewButton_5 = new JButton("log out");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			@Override
@@ -144,13 +184,14 @@ public class EmployeePage extends JFrame {
 		});
 		btnNewButton_5.setBounds(440, 107, 120, 30);
 		panel.add(btnNewButton_5);
-		
+
 		table = createTable();
-		
+		insertTableData();
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 170, 582, 265);
 		panel.add(scrollPane);
-		
+
 		JButton btnNewButton_3_1 = new JButton("new employee");
 		btnNewButton_3_1.addActionListener(new ActionListener() {
 			@Override
@@ -161,7 +202,6 @@ public class EmployeePage extends JFrame {
 		});
 		btnNewButton_3_1.setBounds(230, 107, 120, 30);
 		panel.add(btnNewButton_3_1);
-		
-		
+
 	}
 }

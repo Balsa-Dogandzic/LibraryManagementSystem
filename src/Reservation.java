@@ -64,18 +64,31 @@ public class Reservation {
 	}
 
 	public static boolean addReservation(int readerId, String isbn, String reservationDate, String returnDate) {
-			try {
-				Connection con = JDBCConnection.getConnection();
-				Statement stmt = con.createStatement();
-				String query = "INSERT INTO reservation (reader_id,book_id,date_of_reservation,return_date) VALUES ("
-						+ readerId + ",'" + isbn + "','" + reservationDate + "','" + returnDate + "');";
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "INSERT INTO reservation (reader_id,book_id,date_of_reservation,return_date) VALUES ("
+					+ readerId + ",'" + isbn + "','" + reservationDate + "','" + returnDate + "');";
 
-				stmt.execute(query);
-				return true;
+			stmt.execute(query);
+			return true;
 
-			} catch (SQLException e) {
-				return false;
-			}
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 
+	public static boolean deleteReservation(Object id) {
+		try {
+			Connection con = JDBCConnection.getConnection();
+			Statement stmt = con.createStatement();
+			String query = "DELETE FROM `reservation` WHERE reservation.book_id = " + id;
+
+			stmt.execute(query);
+			return true;
+
+		} catch (SQLException e) {
+			return false;
+		}
+	}
 }
