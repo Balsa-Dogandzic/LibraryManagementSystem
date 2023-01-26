@@ -1,9 +1,3 @@
-- Screen za reservisanje-Userpage
+- excel dugme na BooksScreen
 
-- Jos uslova na Book.java?
-
-- BookCatalogue je screen za user-a, a BooksScreen je za employee-a ok Balsa 
-
-- excel dugme na BooksScreen?
-
-- Da se popuni tabela na EmployeePage(Napravio sam tijelo metode koja to treba da radi)
+- Request book

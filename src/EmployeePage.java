@@ -4,8 +4,6 @@ import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 
@@ -65,9 +64,8 @@ public class EmployeePage extends JFrame {
 		// Disables resizing the columns
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(100);
 		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		table.getColumnModel().getColumn(2).setPreferredWidth(140);
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(3).setPreferredWidth(100);
 		table.getColumnModel().getColumn(4).setResizable(false);
@@ -91,7 +89,7 @@ public class EmployeePage extends JFrame {
 			Statement stmt = conn.createStatement();
 
 			ResultSet rs = stmt.executeQuery(
-					"SELECT reader.id,reader.phone_number,reader.email,reservation.book_id,reader.name,reservation.date_of_reservation,reservation.return_date FROM reservation,reader WHERE reader.id = reservation.reader_id ORDER BY reservation.return_date;");
+					"SELECT reader.name, reader.phone_number, reader.email, book.isbn, book.name, reservation.date_of_reservation, reservation.return_date FROM reader JOIN reservation ON reservation.reader_id = reader.id JOIN book ON reservation.book_id = book.isbn ORDER BY reservation.return_date;");
 			while (rs.next()) {
 				Object[] data = new Object[7];
 				data[0] = rs.getString(1);
@@ -117,7 +115,7 @@ public class EmployeePage extends JFrame {
 	public EmployeePage() {
 		super("Employee screen");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 608, 484);
+		setBounds(100, 100, 690, 484);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -146,7 +144,13 @@ public class EmployeePage extends JFrame {
 		panel.add(btnNewButton);
 
 		JButton btnNewButton_2 = new JButton("request");
-		btnNewButton_2.setBounds(440, 52, 120, 30);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		btnNewButton_2.setBounds(536, 52, 120, 30);
 		panel.add(btnNewButton_2);
 
 		JButton btnNewButton_3 = new JButton("reservation");
@@ -163,15 +167,19 @@ public class EmployeePage extends JFrame {
 		JButton btnNewButton_4 = new JButton("return a book");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();
-				Object value = table.getValueAt(row, col);
-				Reservation.deleteReservation(value);
-				dispose();
-				EmployeePage.main(null);
+				int option = JOptionPane.showConfirmDialog(contentPane, "Do you really want to return this book", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (table.getSelectedRow() != -1 && option == 0) {
+					String isbn = table.getValueAt(table.getSelectedRow(), 3).toString();
+					if(Reservation.deleteReservation(isbn)) {
+						DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+						tableModel.removeRow(table.getSelectedRow());
+						return;
+					}
+					JOptionPane.showMessageDialog(contentPane, "Something went wrong", "Message",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		btnNewButton_4.setBounds(230, 52, 120, 30);
+		btnNewButton_4.setBounds(283, 51, 120, 30);
 		panel.add(btnNewButton_4);
 
 		JButton btnNewButton_5 = new JButton("log out");
@@ -182,14 +190,14 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_5.setBounds(440, 107, 120, 30);
+		btnNewButton_5.setBounds(536, 107, 120, 30);
 		panel.add(btnNewButton_5);
 
 		table = createTable();
 		insertTableData();
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 170, 582, 265);
+		scrollPane.setBounds(0, 170, 666, 265);
 		panel.add(scrollPane);
 
 		JButton btnNewButton_3_1 = new JButton("new employee");
@@ -200,7 +208,7 @@ public class EmployeePage extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_3_1.setBounds(230, 107, 120, 30);
+		btnNewButton_3_1.setBounds(283, 107, 120, 30);
 		panel.add(btnNewButton_3_1);
 
 	}

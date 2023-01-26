@@ -78,13 +78,11 @@ public class Reservation {
 		}
 	}
 
-	public static boolean deleteReservation(Object id) {
+	public static boolean deleteReservation(String isbn) {
 		try {
 			Connection con = JDBCConnection.getConnection();
 			Statement stmt = con.createStatement();
-			String query = "DELETE FROM `reservation` WHERE reservation.book_id = " + id;
-
-			stmt.execute(query);
+			stmt.execute("DELETE FROM `reservation` WHERE reservation.book_id ='" + isbn + "';");
 			return true;
 
 		} catch (SQLException e) {

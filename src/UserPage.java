@@ -8,6 +8,8 @@ import javax.swing.JTable;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Dimension;
@@ -105,6 +107,12 @@ public class UserPage extends JFrame {
 		panel_2.add(btnNewButton_1);
 		
 		JButton btnRequestABook = new JButton("Request");
+		btnRequestABook.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnRequestABook.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRequestABook.setBounds(77, 91, 120, 30);
 		panel_2.add(btnRequestABook);

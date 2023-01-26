@@ -144,7 +144,7 @@ public class SignIn extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
 
-		JButton btnNewButton = new JButton("Sign-in");
+		JButton btnNewButton = new JButton("Sign in");
 		btnNewButton.setBounds(20, 10, 75, 26);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +154,7 @@ public class SignIn extends JFrame {
 				String password = String.valueOf(passwordField.getPassword());
 				ArrayList<String> errors = Login.addReader(name, email, password, phone_number);
 				if (errors == null) {
-					JOptionPane.showMessageDialog(null, "Successful Sign-in", "Message",
+					JOptionPane.showMessageDialog(contentPane, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
 					LoginScreen.main(null);
 					dispose();
@@ -163,7 +163,7 @@ public class SignIn extends JFrame {
 					for(String error:errors) {
 						s += String.format("- %s\n", error);
 					}
-					JOptionPane.showMessageDialog(null, s, "Message",
+					JOptionPane.showMessageDialog(contentPane, s, "Message",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}

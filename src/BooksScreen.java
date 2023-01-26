@@ -16,6 +16,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -184,12 +186,16 @@ public class BooksScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();
-				Object value = table.getValueAt(row, col);
-				Book.delete(value);
-				frame.dispose();
-				BooksScreen.main(null);
+				int option = JOptionPane.showConfirmDialog(frame, "Do you really want to return this book", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if (option == 0 && table.getSelectedRow() != -1) {
+					String isbn = table.getValueAt(table.getSelectedRow(), 0).toString();
+					if(Book.delete(isbn)) {
+						DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+						tableModel.removeRow(table.getSelectedRow());
+						return;
+					}
+					JOptionPane.showMessageDialog(frame, "Deletion failed. Maybe the book is reserved.", "Message",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		panel.add(btnNewButton);

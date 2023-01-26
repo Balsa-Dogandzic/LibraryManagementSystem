@@ -152,13 +152,11 @@ public class Book {
 		return false;
 	}
 
-	public static boolean delete(Object id) {
+	public static boolean delete(String isbn) {
 		try {
 			Connection con = JDBCConnection.getConnection();
 			Statement stmt = con.createStatement();
-			String query = "DELETE FROM `book` WHERE isbn = " + id;
-
-			stmt.execute(query);
+			stmt.execute("DELETE FROM `book` WHERE isbn ='" + isbn + "';");
 			return true;
 
 		} catch (SQLException e) {

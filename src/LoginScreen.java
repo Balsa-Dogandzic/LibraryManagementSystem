@@ -146,9 +146,6 @@ public class LoginScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text1 = textField.getText();
-//				email = text1;
-//				String[] separeted = text1.split("@");
-//				name = separeted[0];
 				String text2 = String.valueOf(textField_2.getPassword());
 				reader = Reader.getReader(text1);
 				if (rdbtnNewRadioButton.isSelected()) {
