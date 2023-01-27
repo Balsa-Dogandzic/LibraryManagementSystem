@@ -147,7 +147,8 @@ public class EmployeePage extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnNewButton_2.setBounds(536, 52, 120, 30);
@@ -167,15 +168,17 @@ public class EmployeePage extends JFrame {
 		JButton btnNewButton_4 = new JButton("return a book");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int option = JOptionPane.showConfirmDialog(contentPane, "Do you really want to return this book", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int option = JOptionPane.showConfirmDialog(contentPane, "Do you really want to return this book",
+						"Message", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (table.getSelectedRow() != -1 && option == 0) {
 					String isbn = table.getValueAt(table.getSelectedRow(), 3).toString();
-					if(Reservation.deleteReservation(isbn)) {
+					if (Reservation.deleteReservation(isbn)) {
 						DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 						tableModel.removeRow(table.getSelectedRow());
 						return;
 					}
-					JOptionPane.showMessageDialog(contentPane, "Something went wrong", "Message",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Something went wrong", "Message",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

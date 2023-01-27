@@ -24,7 +24,7 @@ public class UserPage extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -105,12 +105,13 @@ public class UserPage extends JFrame {
 		});
 		btnNewButton_1.setBounds(77, 146, 120, 30);
 		panel_2.add(btnNewButton_1);
-		
+
 		JButton btnRequestABook = new JButton("Request");
 		btnRequestABook.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(contentPane, "Work in progress", "Message",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		btnRequestABook.setFont(new Font("Tahoma", Font.BOLD, 11));

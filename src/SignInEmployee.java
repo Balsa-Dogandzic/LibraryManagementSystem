@@ -27,7 +27,7 @@ public class SignInEmployee extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField textField_1;
@@ -148,7 +148,7 @@ public class SignInEmployee extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JButton btnNewButton_1 = new JButton("Submit");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
@@ -156,7 +156,7 @@ public class SignInEmployee extends JFrame {
 				String username = textField.getText();
 				String password = String.valueOf(textField_1.getPassword());
 				ArrayList<String> errors = Login.addWorker(username, password);
-				
+
 				if (errors == null) {
 					JOptionPane.showMessageDialog(contentPane, "Successful Sign-in", "Message",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -164,11 +164,10 @@ public class SignInEmployee extends JFrame {
 					dispose();
 				} else {
 					String s = "";
-					for (String error: errors) {
+					for (String error : errors) {
 						s += String.format("- %s\n", error);
 					}
-					JOptionPane.showMessageDialog(contentPane, s, "Message",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, s, "Message", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

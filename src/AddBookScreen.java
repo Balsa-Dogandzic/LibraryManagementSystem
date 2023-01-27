@@ -210,8 +210,9 @@ public class AddBookScreen {
 						return;
 					}
 					JOptionPane.showMessageDialog(frame, "Something went wrong", "Message", JOptionPane.ERROR_MESSAGE);
-				}catch(Exception ex) {
-					JOptionPane.showMessageDialog(frame, "You didn't enter a price or year", "Message", JOptionPane.ERROR_MESSAGE);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(frame, "You didn't enter a price or year", "Message",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

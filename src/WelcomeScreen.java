@@ -23,7 +23,7 @@ public class WelcomeScreen extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 
 	/**
@@ -102,7 +102,7 @@ public class WelcomeScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SignIn si = new SignIn();
 				si.initialize();
-               dispose();
+				dispose();
 			}
 		});
 		panel_2.add(btnNewButton_1);

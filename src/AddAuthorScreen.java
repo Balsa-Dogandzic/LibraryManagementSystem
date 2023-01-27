@@ -75,7 +75,7 @@ public class AddAuthorScreen {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Inserts the author and asks the user if he wants to enter more authors
+				// Inserts the author and asks the user if he wants to enter more authors
 				String name = textField.getText();
 				if (Author.addAuthor(name)) {
 					int option = JOptionPane.showConfirmDialog(frame,
@@ -85,9 +85,9 @@ public class AddAuthorScreen {
 						AddBookScreen.main(null);
 						frame.dispose();
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(frame, "Invalid data format", "Message", JOptionPane.ERROR_MESSAGE);
-				}	
+				}
 			}
 		});
 		panel.add(btnNewButton);
@@ -97,7 +97,7 @@ public class AddAuthorScreen {
 		btnGoBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Goes back to add book screen
+				// Goes back to add book screen
 				AddBookScreen.main(null);
 				frame.dispose();
 			}

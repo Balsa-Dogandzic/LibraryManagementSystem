@@ -28,7 +28,7 @@ public class Login {
 		}
 		return status;
 	}
-	
+
 	public static boolean validateReader(String email, String password) {
 		boolean status = false;
 		try (
@@ -49,21 +49,22 @@ public class Login {
 		}
 		return status;
 	}
-	
+
 	public static ArrayList<String> addReader(String name, String email, String password, String phoneNumber) {
 		ArrayList<String> errors = new ArrayList<String>();
-		
+
 		Pattern emailRegex = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 		Pattern phoneRegex = Pattern.compile("^(\\d{3}[- .]?){2}\\d{3}$");
 		Pattern passwordRegex = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$");
-		
-		if(name.length() < 3)
+
+		if (name.length() < 3)
 			errors.add("Name must be at least 3 characters");
-		if(!(emailRegex.matcher(email).matches()))
+		if (!(emailRegex.matcher(email).matches()))
 			errors.add("Email not valid");
-		if(!(passwordRegex.matcher(password).matches()))
-			errors.add("Password must be 8-20 characters long, and contain digits and upper case and lower case letters.");
-		if(!(phoneRegex.matcher(phoneNumber).matches()))
+		if (!(passwordRegex.matcher(password).matches()))
+			errors.add(
+					"Password must be 8-20 characters long, and contain digits and upper case and lower case letters.");
+		if (!(phoneRegex.matcher(phoneNumber).matches()))
 			errors.add("Phone number not valid");
 		if (errors.size() == 0) {
 			try {
@@ -81,23 +82,25 @@ public class Login {
 			}
 		}
 		return errors;
-		
+
 	}
 
 	public static ArrayList<String> addWorker(String username, String password) {
-		//Checks if a password contains upper case, lower case and digits
+		// Checks if a password contains upper case, lower case and digits
 		ArrayList<String> errors = new ArrayList<String>();
 		Pattern passwordRegex = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,20}$");
-		
-		if(!(passwordRegex.matcher(password).matches()))
-			errors.add("Password must be 8-20 characters long, and contain digits and upper case and lower case letters.");
-		if(username.length() < 3)
+
+		if (!(passwordRegex.matcher(password).matches()))
+			errors.add(
+					"Password must be 8-20 characters long, and contain digits and upper case and lower case letters.");
+		if (username.length() < 3)
 			errors.add("Username must be at least 3 characters long");
-		if(errors.size() == 0) {
+		if (errors.size() == 0) {
 			try {
 				Connection con = JDBCConnection.getConnection();
 				Statement stmt = con.createStatement();
-				String query = "INSERT INTO employee (username,password) VALUES ('" + username + "','" + password + "')";
+				String query = "INSERT INTO employee (username,password) VALUES ('" + username + "','" + password
+						+ "')";
 
 				stmt.execute(query);
 				return null;
@@ -108,7 +111,6 @@ public class Login {
 			}
 		}
 		return errors;
-		
 
 	}
 

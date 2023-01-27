@@ -48,26 +48,26 @@ public class BookCatalogue {
 	}
 
 	private JTable createTable() {
-		String[] colName = { "isbn", "name", "category", "price", "author", "year"};
-	    if (table == null) {
-	        table = new JTable() {
-	            /**
+		String[] colName = { "isbn", "name", "category", "price", "author", "year" };
+		if (table == null) {
+			table = new JTable() {
+				/**
 				 * 
 				 */
 				private static final long serialVersionUID = 1L;
 
-				//Disables cell editing
+				// Disables cell editing
 				public boolean isCellEditable(int nRow, int nCol) {
-	                return false;
-	            }
-	        };
-	    }
-		
-	    DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
-	    contactTableModel.setColumnIdentifiers(colName);
-	    
-	    //Disables resizing the columns
-	    table.getColumnModel().getColumn(0).setResizable(false);
+					return false;
+				}
+			};
+		}
+
+		DefaultTableModel contactTableModel = (DefaultTableModel) table.getModel();
+		contactTableModel.setColumnIdentifiers(colName);
+
+		// Disables resizing the columns
+		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(120);
@@ -75,20 +75,20 @@ public class BookCatalogue {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		table.getColumnModel().getColumn(5).setResizable(false);
-		
-		//Allows selection of only one row
-	    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    table.getTableHeader().setReorderingAllowed(false);
-	    
-	    return table;
+
+		// Allows selection of only one row
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getTableHeader().setReorderingAllowed(false);
+
+		return table;
 	}
-	
-	//Inserts the rows in the table from the database
+
+	// Inserts the rows in the table from the database
 	private void insertTableData() {
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		ArrayList<Book> books = Book.getAllBooks();
-		
-		for(Book b : books) {
+
+		for (Book b : books) {
 			Object[] data = new Object[6];
 			data[0] = b.getIsbn();
 			data[1] = b.getName();
@@ -100,14 +100,14 @@ public class BookCatalogue {
 		}
 		table.setModel(tableModel);
 	}
-	
+
 	private void filter(String query) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
 		table.setRowSorter(sorter);
 		sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query));
 	}
-	
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -117,28 +117,28 @@ public class BookCatalogue {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		
+
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		
+
 		table = createTable();
 		insertTableData();
 		panel.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(0, 96, 517, 214);
 		panel.add(scrollPane);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 517, 92);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Look for yourself!");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(10, 10, 497, 28);
 		panel_1.add(lblNewLabel);
-		
+
 		textField = new JTextField();
 		textField.setBounds(10, 63, 175, 19);
 		textField.addKeyListener(new KeyAdapter() {
@@ -150,12 +150,12 @@ public class BookCatalogue {
 		});
 		panel_1.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Search a book:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(10, 44, 175, 19);
 		panel_1.add(lblNewLabel_1);
-		
+
 		JButton btnNewButton = new JButton("Go back");
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override

@@ -24,7 +24,7 @@ public class SignIn extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -160,11 +160,10 @@ public class SignIn extends JFrame {
 					dispose();
 				} else {
 					String s = "";
-					for(String error:errors) {
+					for (String error : errors) {
 						s += String.format("- %s\n", error);
 					}
-					JOptionPane.showMessageDialog(contentPane, s, "Message",
-							JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, s, "Message", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -21,14 +21,12 @@ public class LoginScreen {
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField textField_2;
-//	private static String name;
-//	private static String email;
 	private static Reader reader;
 
 	public static Reader getReader() {
 		return reader;
 	}
-	
+
 	/**
 	 * Launch the application.
 	 */
