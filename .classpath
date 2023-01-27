@@ -10,13 +10,5 @@
 	<classpathentry kind="lib" path="dependencies/mysql-connector-java-8.0.28.jar"/>
 	<classpathentry kind="lib" path="dependencies/jgoodies-common-1.8.0.jar" sourcepath="dependencies/jgoodies-common-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="dependencies/jgoodies-forms-1.8.0.jar" sourcepath="dependencies/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-examples-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-excelant-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-javadoc-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-ooxml-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-ooxml-full-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-ooxml-lite-5.2.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/poi-scratchpad-5.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
