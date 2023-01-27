@@ -157,7 +157,7 @@ public class BooksScreen {
 		lblNewLabel.setBounds(10, 10, 672, 49);
 		panel.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("Count: " + books.size(), SwingConstants.RIGHT);
+		JLabel lblNewLabel_1 = new JLabel("Count: " + table.getRowCount(), SwingConstants.RIGHT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(552, 10, 130, 33);
 		panel.add(lblNewLabel_1);
@@ -192,6 +192,7 @@ public class BooksScreen {
 					if (Book.delete(isbn)) {
 						DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 						tableModel.removeRow(table.getSelectedRow());
+						lblNewLabel_1.setText("Count: " + table.getRowCount());
 						return;
 					}
 					JOptionPane.showMessageDialog(frame, "Deletion failed. Maybe the book is reserved.", "Message",
